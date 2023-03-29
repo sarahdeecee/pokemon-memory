@@ -26,5 +26,17 @@ Users can "roll" Pokemon names from a pool of all Pokemon and reveal a picture o
 | --- | --- |
 | :black_square_button: | Different users can access the same rolls by link |
 
+## Developer Goals
+- Practice TypeScript
+- Manipulate a large amount of data (1015 Pokemon)
+- Practice Mobile-First Responsive Design
+
+## Stack
+- JavaScript
+- TypeScript
+- React
+- HTML5
+- CSS3
+
 ## Notes
 - Will likely use the [Pokemon API](https://pokeapi.co/)
