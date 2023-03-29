@@ -1,14 +1,30 @@
-# User Stories
-## MVP
+# Draw Pokemon from Memory Game
+Pokemon Memory app helps users play the Draw Pokemon from Memory Game.
+
+Users can "roll" Pokemon names from a pool of all Pokemon and reveal a picture of the Pokemon at the end of the round.
+
+## User Stories
+
+### MVP
 | :white_check_mark: | User Story |
 | --- | --- |
 | :black_square_button: | Users can get a random Pokemon name |
 | :black_square_button: | Users can chooes to re-roll for additional Pokemon names |
-## Optional
+
+### Optional
 | :white_check_mark: | User Story |
 | --- | --- |
 | :black_square_button: | Users can choose to veto specific Pokemon |
+| :black_square_button: | Users can choose to roll a new Pokemon (remove roll from pool) or reset Pokemon |
 | :black_square_button: | Users can select a number of Pokemon per match (remove rolled Pokemon from pool each round) |
 | :black_square_button: | Users can choose which generations to play from |
 | :black_square_button: | Users can see picture(s) of the Pokemon after each round |
 | :black_square_button: | Users can set timers for each round |
+
+### Stretch
+| :white_check_mark: | User Story |
+| --- | --- |
+| :black_square_button: | Different users can access the same rolls by link |
+
+## Notes
+- Will likely use the [Pokemon API](https://pokeapi.co/)
