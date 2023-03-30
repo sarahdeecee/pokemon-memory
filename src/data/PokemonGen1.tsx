@@ -56,12 +56,12 @@ export const pokemonGen1: Pokemon[] = [
     generation: 1
   },
   {
-    name: "nidoran-f",
+    name: "nidoran (F)",
     id: 29,
     generation: 1
   },
   {
-    name: "nidoran-m",
+    name: "nidoran (M)",
     id: 32,
     generation: 1
   },
@@ -161,7 +161,7 @@ export const pokemonGen1: Pokemon[] = [
     generation: 1
   },
   {
-    name: "farfetchd",
+    name: "farfetch'd",
     id: 83,
     generation: 1
   },
@@ -696,7 +696,7 @@ export const pokemonGen1: Pokemon[] = [
     generation: 1
   },
   {
-    name: "mr-mime",
+    name: "mr. mime",
     id: 122,
     generation: 1
   },

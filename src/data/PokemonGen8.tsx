@@ -416,7 +416,7 @@ export const pokemonListGen8: Pokemon[] = [
     generation: 8
   },
   {
-    name: "mr-rime",
+    name: "mr. Rime",
     id: 866,
     generation: 8
   },

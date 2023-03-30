@@ -516,7 +516,7 @@ export const pokemonListGen4: Pokemon[] = [
     generation: 4
   },
   {
-    name: "porygon-z",
+    name: "porygon-Z",
     id: 474,
     generation: 4
   },
