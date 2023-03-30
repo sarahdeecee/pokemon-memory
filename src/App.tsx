@@ -15,8 +15,8 @@ function App() {
   const [add, setAdd] = useState<boolean>(false);
 
   useEffect(() => {
-    setAdd(false);
     const randomNumber = Math.ceil(Math.random()*totalPokemonCount);
+    if (add) {
       fetch(`https://pokeapi.co/api/v2/pokemon/${randomNumber}/`)
         .then(res => res.json())
         .then(
@@ -24,11 +24,13 @@ function App() {
             const newPokemon = {name: capitalize(result.name), id: result.id};
             setPokemon([...pokemon, newPokemon]);
             console.log(result.name);
-          },
-          (error) => {
-            console.log('Error >>>>> ', error);
-          }
-        )
+            setAdd(false);
+            },
+            (error) => {
+              console.log('Error >>>>> ', error);
+            }
+          )
+    }
   }, [add]);
 
   const handleAddPokemon = () => {
