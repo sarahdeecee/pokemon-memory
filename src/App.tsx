@@ -10,8 +10,8 @@ import { pokemonListGen6 } from './data/PokemonGen6';
 import { pokemonListGen7 } from './data/PokemonGen7';
 import { pokemonListGen8 } from './data/PokemonGen8';
 import { pokemonListGen9 } from './data/PokemonGen9';
+import Options from './components/Options';
 
-const totalPokemonCount = 1015;
 const capitalize = (string: string): string => {
   return string[0].toUpperCase() + string.slice(1,string.length);
 }
@@ -26,11 +26,8 @@ const hasDuplicate = (pokemonList: Pokemon[], pokemonId: number): boolean => {
   return (pokemonList.find(pokemon => pokemon.id === pokemonId)) ? true : false;
 }
 
-const inGeneration = (poolList: Pokemon[], pokemonName: string): boolean => {
-  return (poolList.find(pokemon => pokemon.name === pokemonName)) ? true : false;
-}
-
 const pokemonFullList = [...pokemonGen1, ...pokemonListGen2, ...pokemonListGen3, ...pokemonListGen4, ...pokemonListGen5, ...pokemonListGen6, ...pokemonListGen7, ...pokemonListGen8, ...pokemonListGen9];
+const totalPokemonCount = pokemonFullList.length;
 
 function App() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
@@ -83,19 +80,6 @@ function App() {
 
   }
 
-  const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setGenerations({...generations, [e.target.value]: e.target.checked});
-  };
-
-  const options = allGenerationsArr.map(genAsNum => <Grid item>
-    <FormControlLabel
-      key={genAsNum}
-      label={genAsNum.toString()}
-      value={genAsNum}
-      control={<Checkbox checked={generations[genAsNum]} onChange={handleCheck} />}
-    />
-  </Grid>);
-
   const pokemonList = pokemon.map(pokemon => <Typography variant='body1' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
   
   return (
@@ -105,7 +89,7 @@ function App() {
       <Button onClick={handleAddPokemon}>Next</Button>
       <Button onClick={handleReset}>Reset</Button>
       <Button onClick={handleOptions}>Options</Button>
-      {options}
+      <Options generations={generations} setGenerations={setGenerations} />
     </div>
   );
 }
