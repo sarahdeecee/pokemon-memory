@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import './App.scss';
 import { Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, Typography } from '@mui/material';
 import { pokemonGen1 } from './data/PokemonGen1';
 import { pokemonListGen2 } from './data/PokemonGen2';

@@ -1,0 +1,21 @@
+/* colors */
+$blue: #0D698B;
+$ivory: #F2F1E8;
+$dark-blue: #050533;
+$cinnabar: #E34234;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: $ivory;
+}
+h1 {
+  color:#0D698B
+}
+.MuiButton-root {
+  text-transform: none !important;
+  color: $ivory !important;
+  background-color: $blue !important;
+}
