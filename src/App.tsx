@@ -35,14 +35,14 @@ function App() {
   const [pool, setPool] = useState<Pokemon[]>(pokemonFullList);
   const [generations, setGenerations] = useState<Object>({
     1: true,
-    2: false,
-    3: false,
-    4: false,
-    5: false,
-    6: false,
-    7: false,
-    8: false,
-    9: false,
+    2: true,
+    3: true,
+    4: true,
+    5: true,
+    6: true,
+    7: true,
+    8: true,
+    9: true,
   });
 
   // create pool from selected generations
@@ -52,30 +52,20 @@ function App() {
   // Select samples from generations
   const poolFromGenerations = pokemonFullList.filter(pokemon => selectedGenerations.includes(pokemon.generation));
 
-  // useEffect(() => {
-  //   let randomNumber = Math.ceil(Math.random()*totalPokemonCount);
+  useEffect(() => {
+    let randomNumber = Math.ceil(Math.random() * poolFromGenerations.length) - 1;
     
-  //   if (add && pokemon.length < totalPokemonCount) {
-  //     // if list already has ID number, get a new random number
-  //     while (hasDuplicate(pokemon, randomNumber)) {
-  //       randomNumber = Math.ceil(Math.random()*totalPokemonCount);
-  //     }
+    if (add && pokemon.length < poolFromGenerations.length) {
+      // if list already has ID number, get a new random number
+      while (hasDuplicate(pokemon, poolFromGenerations[randomNumber].id)) {
+        randomNumber = Math.ceil(Math.random() * poolFromGenerations.length);
+      }
 
-  //     fetch(`https://pokeapi.co/api/v2/pokemon/${randomNumber}/`)
-  //       .then(res => res.json())
-  //       .then(
-  //         (result) => {
-  //           const newPokemon = {name: capitalize(result.name), id: result.id};
-  //           setPokemon([...pokemon, newPokemon]);
-  //           console.log(result.name);
-  //           setAdd(false);
-  //           },
-  //           (error) => {
-  //             console.log('Error >>>>> ', error);
-  //           }
-  //         )
-  //   }
-  // }, [add]);
+      const newPokemon: Pokemon = {...poolFromGenerations[randomNumber], name: capitalize(poolFromGenerations[randomNumber].name)};
+      setPokemon([...pokemon, newPokemon]);
+      setAdd(false);
+    }
+  }, [add]);
 
   const handleAddPokemon = () => {
     setAdd(true);
