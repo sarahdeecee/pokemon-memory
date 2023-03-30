@@ -91,9 +91,18 @@ function App() {
     <div className="App">
       <Typography variant='h3' component='h1' align='center'>Pokemon From Memory</Typography>
       {pokemonList}
-      <Button onClick={handleAddPokemon}>Next</Button>
-      <Button onClick={handleReset}>Reset</Button>
-      <Button onClick={handleOptions}>Options</Button>
+      {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
+      <Grid>
+        <Grid item>
+          <Button onClick={handleAddPokemon}>Next</Button>
+        </Grid>
+        <Grid item>
+          <Button onClick={handleReset}>Reset</Button>
+        </Grid>
+        <Grid item>
+          <Button onClick={handleOptions}>Options</Button>
+        </Grid>
+      </Grid>
       <Dialog onClose={handleOptionsClose} open={optionsOpen}>
         <DialogTitle>Select Generations</DialogTitle>
         <DialogContent>
