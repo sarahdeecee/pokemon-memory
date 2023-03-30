@@ -11,12 +11,18 @@ import { pokemonListGen7 } from './data/PokemonGen7';
 import { pokemonListGen8 } from './data/PokemonGen8';
 import { pokemonListGen9 } from './data/PokemonGen9';
 import Options from './components/Options';
+import Results from './components/Results';
 
 const capitalize = (string: string): string => {
   return string[0].toUpperCase() + string.slice(1,string.length);
 }
 
-type Pokemon = {name: string, id: number, generation: number};
+type Pokemon = {
+  name: string,
+  id: number,
+  generation: number,
+  imgSrc?: string
+};
 type GenSelect = {
   [key: string]: boolean
 }
@@ -43,6 +49,7 @@ function App() {
     9: true,
   });
   const [optionsOpen, setOptionsOpen] = useState<boolean>(false);
+  const [revealImg, setRevealImg] = useState<boolean>(false);
 
   // create pool from selected generations
   const allGenerationsArr: string[] = Object.keys(Object.fromEntries(Object.entries(generations)));
@@ -55,18 +62,33 @@ function App() {
     let randomNumber = Math.ceil(Math.random() * poolFromGenerations.length) - 1;
     
     if (add && pokemon.length < poolFromGenerations.length) {
+      let randomPokemon = poolFromGenerations[randomNumber];
       // if list already has ID number, get a new random number
-      while (hasDuplicate(pokemon, poolFromGenerations[randomNumber].id)) {
+      while (hasDuplicate(pokemon, randomPokemon.id)) {
         randomNumber = Math.ceil(Math.random() * poolFromGenerations.length);
+        randomPokemon = poolFromGenerations[randomNumber];
       }
 
-      const newPokemon: Pokemon = {...poolFromGenerations[randomNumber], name: capitalize(poolFromGenerations[randomNumber].name)};
-      setPokemon([...pokemon, newPokemon]);
-      setAdd(false);
+      // fetch artwork from API
+      fetch(`https://pokeapi.co/api/v2/pokemon/${randomPokemon.id}/`)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            const newPokemonImg: string = result.sprites.other["official-artwork"]["front_default"];
+            // Add new pokemon to list
+            const newPokemon: Pokemon = {...randomPokemon, name: capitalize(poolFromGenerations[randomNumber].name), imgSrc: newPokemonImg};
+            setPokemon([...pokemon, newPokemon]);
+            setAdd(false);
+            },
+            (error) => {
+              console.log('Error >>>>> ', error);
+            }
+        );
     }
   }, [add]);
 
   const handleAddPokemon = () => {
+    setRevealImg(false);
     setAdd(true);
   }
 
@@ -83,14 +105,29 @@ function App() {
     setOptionsOpen(false);
   }
 
+  const handleRevealImg = () => {
+    revealImg ? setRevealImg(false) : setRevealImg(true);
+  }
+
   const pokemonList = pokemon.map(pokemon => <Typography variant='body1' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
-  
+  const currentPokemon = <Results currentPokemon={pokemon[pokemon.length - 1]} />
+
+  const revealOrHideButton = () => {
+    if (revealImg && pokemon.length !==0) {
+      return <Grid item><Button onClick={handleRevealImg}>Hide</Button></Grid>;
+    } else if (!revealImg && pokemon.length !==0) {
+      return <Grid item><Button onClick={handleRevealImg}>Reveal</Button></Grid>;
+    }
+  }
+
   return (
     <div className="App">
       <Typography variant='h3' component='h1' align='center'>Pokemon From Memory</Typography>
       {pokemonList}
       {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
       <Grid>
+        {revealOrHideButton()}
+        {revealImg && currentPokemon}
         <Grid item>
           <Button onClick={handleAddPokemon}>Next</Button>
         </Grid>
