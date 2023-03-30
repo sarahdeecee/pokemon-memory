@@ -46,7 +46,7 @@ function App() {
   
   return (
     <div className="App">
-      <Typography variant="h3" component="h1">Random Pokemon Generator</Typography>
+      <Typography variant="h3" component="h1">Pokemon From Memory</Typography>
       {pokemonList}
       <Button onClick={handleAddPokemon}>Next</Button>
       <Button onClick={handleReset}>Reset</Button>
