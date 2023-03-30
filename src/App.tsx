@@ -17,6 +17,18 @@ const capitalize = (string: string): string => {
   return string[0].toUpperCase() + string.slice(1,string.length);
 }
 
+const camelCase = (string: string): string => {
+  const strArr = string.split(' ');
+  const camelStrArr = [];
+  for (let str of strArr) {
+    camelStrArr.push(str[0].toUpperCase() + str.slice(1,str.length));
+    if (strArr.indexOf(str) < strArr.length - 1) { // Re-add space if not last word
+      camelStrArr.push(' ')
+    }
+  }
+  return camelStrArr.join('');
+}
+
 type Pokemon = {
   name: string,
   id: number,
