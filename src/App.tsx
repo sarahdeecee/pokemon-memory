@@ -46,6 +46,7 @@ function App() {
   
   return (
     <div className="App">
+      <p>Pokemon from Memory</p>
       <p>{pokemonList}</p>
       <Button onClick={handleAddPokemon}>Next</Button>
       <Button onClick={handleReset}>Reset</Button>
