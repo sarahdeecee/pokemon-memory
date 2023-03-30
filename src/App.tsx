@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 const totalPokemonCount = 1015;
+const capitalize = (string: string): string => {
+  return string[0].toUpperCase() + string.slice(1,string.length);
+}
 
 function App() {
   const [pokemon, setPokemon] = useState<string[]>([]);
@@ -15,7 +18,7 @@ function App() {
           .then(res => res.json())
           .then(
             (result) => {
-              setPokemon(result.name);
+              setPokemon([...pokemon, capitalize(result.name)]);
               console.log(result.name);
             },
             (error) => {
