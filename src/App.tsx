@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { Button, Checkbox, FormControlLabel, Grid, Typography } from '@mui/material';
+import { Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, Typography } from '@mui/material';
 import { pokemonGen1 } from './data/PokemonGen1';
 import { pokemonListGen2 } from './data/PokemonGen2';
 import { pokemonListGen3 } from './data/PokemonGen3';
@@ -44,6 +44,7 @@ function App() {
     8: true,
     9: true,
   });
+  const [optionsOpen, setOptionsOpen] = useState<boolean>(false);
 
   // create pool from selected generations
   const allGenerationsArr: string[] = Object.keys(Object.fromEntries(Object.entries(generations)));
@@ -77,7 +78,11 @@ function App() {
   }
 
   const handleOptions = () => {
+    setOptionsOpen(true);
+  }
 
+  const handleOptionsClose = () => {
+    setOptionsOpen(false);
   }
 
   const pokemonList = pokemon.map(pokemon => <Typography variant='body1' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
@@ -89,7 +94,15 @@ function App() {
       <Button onClick={handleAddPokemon}>Next</Button>
       <Button onClick={handleReset}>Reset</Button>
       <Button onClick={handleOptions}>Options</Button>
-      <Options generations={generations} setGenerations={setGenerations} />
+      <Dialog onClose={handleOptionsClose} open={optionsOpen}>
+        <DialogTitle>Select Generations</DialogTitle>
+        <DialogContent>
+          <Options generations={generations} setGenerations={setGenerations} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleOptionsClose}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
