@@ -18,7 +18,7 @@ Users can "roll" Pokemon names from a pool of all Pokemon and reveal a picture o
 | :white_check_mark: | Users can choose to roll a new Pokemon (remove roll from pool) or reset Pokemon |
 | :black_square_button: | Users can select a number of Pokemon per match (remove rolled Pokemon from pool each round) |
 | :white_check_mark: | Users can choose which generations to play from |
-| :black_square_button: | Users can see picture(s) of the Pokemon after each round |
+| :white_check_mark: | Users can see picture(s) of the Pokemon after each round |
 | :black_square_button: | Users can set timers for each round |
 
 ### Stretch
