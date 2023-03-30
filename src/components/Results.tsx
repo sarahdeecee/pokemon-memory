@@ -3,8 +3,8 @@ function Results(props: any) {
   const {name, id, generation, imgSrc} = currentPokemon ?? '';
 
   return (
-    <div className="Results">
-      <img src={imgSrc} alt={`Illustration of ${name}`} />
+    <div>
+      <img src={imgSrc} alt={`Illustration of ${name}`} className="Results" />
     </div>
   );
 }
