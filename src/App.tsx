@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { Button, Typography } from '@mui/material';
+import { Button, Checkbox, FormControlLabel, Grid, Typography } from '@mui/material';
 import { pokemonGen1 } from './data/PokemonGen1';
 import { pokemonListGen2 } from './data/PokemonGen2';
 import { pokemonListGen3 } from './data/PokemonGen3';
@@ -17,6 +17,9 @@ const capitalize = (string: string): string => {
 }
 
 type Pokemon = {name: string, id: number, generation: number};
+type GenSelect = {
+  [key: string]: boolean
+}
 
 const hasDuplicate = (pokemonList: Pokemon[], pokemonId: number): boolean => {
   (pokemonList.find(pokemon => pokemon.id === pokemonId)) ? console.log('duplicate found') : console.log('no duplicate');
@@ -33,7 +36,7 @@ function App() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
   const [add, setAdd] = useState<boolean>(false);
   const [pool, setPool] = useState<Pokemon[]>(pokemonFullList);
-  const [generations, setGenerations] = useState<Object>({
+  const [generations, setGenerations] = useState<GenSelect>({
     1: true,
     2: true,
     3: true,
@@ -46,9 +49,9 @@ function App() {
   });
 
   // create pool from selected generations
+  const allGenerationsArr: string[] = Object.keys(Object.fromEntries(Object.entries(generations)));
   const selectedGenerations: number[] = Object.keys(Object.fromEntries(Object.entries(generations).filter(([generation, value]) => value === true))).map(genAsStr => Number.parseInt(genAsStr));
-  console.log('Gens: ',selectedGenerations);
-
+  console.log('Gens: ', selectedGenerations);
   // Select samples from generations
   const poolFromGenerations = pokemonFullList.filter(pokemon => selectedGenerations.includes(pokemon.generation));
 
@@ -76,6 +79,23 @@ function App() {
     setAdd(false);
   }
 
+  const handleOptions = () => {
+
+  }
+
+  const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setGenerations({...generations, [e.target.value]: e.target.checked});
+  };
+
+  const options = allGenerationsArr.map(genAsNum => <Grid item>
+    <FormControlLabel
+      key={genAsNum}
+      label={genAsNum.toString()}
+      value={genAsNum}
+      control={<Checkbox checked={generations[genAsNum]} onChange={handleCheck} />}
+    />
+  </Grid>);
+
   const pokemonList = pokemon.map(pokemon => <Typography variant='body1' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
   
   return (
@@ -84,7 +104,8 @@ function App() {
       {pokemonList}
       <Button onClick={handleAddPokemon}>Next</Button>
       <Button onClick={handleReset}>Reset</Button>
-      <Button>Options</Button>
+      <Button onClick={handleOptions}>Options</Button>
+      {options}
     </div>
   );
 }
