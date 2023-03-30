@@ -1,7 +1,7 @@
 type Pokemon = {
-  name: String,
-  id: Number,
-  generation: Number
+  name: string,
+  id: number,
+  generation: number
 }
 
 export const pokemonListGen3: Pokemon[] = [
