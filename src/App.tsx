@@ -23,7 +23,8 @@ function App() {
     let randomNumber = Math.ceil(Math.random()*totalPokemonCount);
     
     if (add && pokemon.length < totalPokemonCount) {
-      while (hasDuplicate(pokemon, randomNumber) && add) {
+      // if list already has ID number, get a new random number
+      while (hasDuplicate(pokemon, randomNumber)) {
         randomNumber = Math.ceil(Math.random()*totalPokemonCount);
       }
 
