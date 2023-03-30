@@ -40,11 +40,11 @@ function App() {
     setAdd(false);
   }
 
-  const pokemonList = pokemon.map(pokemon => <Typography variant="body1" key={pokemon.id}>{pokemon.name}</Typography>)
+  const pokemonList = pokemon.map(pokemon => <Typography variant='body1' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
   
   return (
     <div className="App">
-      <Typography variant="h3" component="h1">Pokemon From Memory</Typography>
+      <Typography variant='h3' component='h1' align='center'>Pokemon From Memory</Typography>
       {pokemonList}
       <Button onClick={handleAddPokemon}>Next</Button>
       <Button onClick={handleReset}>Reset</Button>
