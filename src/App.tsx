@@ -9,14 +9,24 @@ const capitalize = (string: string): string => {
 
 type Pokemon = {name: string, id: number};
 
+const hasDuplicate = (pokemonList: Pokemon[], pokemonId: number): boolean => {
+  (pokemonList.find(pokemon => pokemon.id === pokemonId)) ? console.log('duplicate found') : console.log('no duplicate');
+  return (pokemonList.find(pokemon => pokemon.id === pokemonId)) ? true : false;
+}
+
 function App() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
   const [pool, setPool] = useState<string[]>([]);
   const [add, setAdd] = useState<boolean>(false);
 
   useEffect(() => {
-    const randomNumber = Math.ceil(Math.random()*totalPokemonCount);
-    if (add) {
+    let randomNumber = Math.ceil(Math.random()*totalPokemonCount);
+    
+    if (add && pokemon.length < totalPokemonCount) {
+      while (hasDuplicate(pokemon, randomNumber) && add) {
+        randomNumber = Math.ceil(Math.random()*totalPokemonCount);
+      }
+
       fetch(`https://pokeapi.co/api/v2/pokemon/${randomNumber}/`)
         .then(res => res.json())
         .then(
