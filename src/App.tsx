@@ -113,11 +113,7 @@ function App() {
   const currentPokemon = <Results currentPokemon={pokemon[pokemon.length - 1]} />
 
   const revealOrHideButton = () => {
-    if (revealImg && pokemon.length !==0) {
-      return <Grid item><Button onClick={handleRevealImg}>Hide</Button></Grid>;
-    } else if (!revealImg && pokemon.length !==0) {
-      return <Grid item><Button onClick={handleRevealImg}>Reveal</Button></Grid>;
-    }
+    return revealImg ? <Grid item><Button onClick={handleRevealImg}>Hide</Button></Grid> : <Grid item><Button onClick={handleRevealImg}>Reveal</Button></Grid>;
   }
 
   return (
@@ -126,7 +122,7 @@ function App() {
       {pokemonList}
       {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
       <Grid>
-        {revealOrHideButton()}
+        {pokemon.length !== 0 && revealOrHideButton()}
         {revealImg && currentPokemon}
         <Grid item>
           <Button onClick={handleAddPokemon}>Next</Button>
