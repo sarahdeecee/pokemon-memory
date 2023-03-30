@@ -12,7 +12,6 @@ type Pokemon = {name: string, id: number};
 function App() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
   const [pool, setPool] = useState<string[]>([]);
-  const [reset, setReset] = useState<boolean>(false);
   const [add, setAdd] = useState<boolean>(false);
 
   useEffect(() => {
@@ -37,7 +36,6 @@ function App() {
   }
 
   const handleReset = () => {
-    setReset(true);
     setPokemon([]);
     setAdd(false);
   }
