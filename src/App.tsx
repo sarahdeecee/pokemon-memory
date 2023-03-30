@@ -18,23 +18,28 @@ function App() {
   useEffect(() => {
     setAdd(false);
     const randomNumber = Math.ceil(Math.random()*totalPokemonCount);
-      if (!reset) {
-        fetch(`https://pokeapi.co/api/v2/pokemon/${randomNumber}/`)
-          .then(res => res.json())
-          .then(
-            (result) => {
-              setPokemon([...pokemon, {name: capitalize(result.name), id: result.id}]);
-              console.log(result.name);
-            },
-            (error) => {
-              console.log('Error >>>>> ', error);
-            }
-          )
-      }
+      fetch(`https://pokeapi.co/api/v2/pokemon/${randomNumber}/`)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            const newPokemon = {name: capitalize(result.name), id: result.id};
+            setPokemon([...pokemon, newPokemon]);
+            console.log(result.name);
+          },
+          (error) => {
+            console.log('Error >>>>> ', error);
+          }
+        )
   }, [add]);
 
   const handleAddPokemon = () => {
     setAdd(true);
+  }
+
+  const handleReset = () => {
+    setReset(true);
+    setPokemon([]);
+    setAdd(false);
   }
 
   const pokemonList = pokemon.map(pokemon => <p key={pokemon.id}>{pokemon.name}</p>)
@@ -43,6 +48,7 @@ function App() {
     <div className="App">
       <p>{pokemonList}</p>
       <Button onClick={handleAddPokemon}>Next</Button>
+      <Button onClick={handleReset}>Reset</Button>
     </div>
   );
 }
