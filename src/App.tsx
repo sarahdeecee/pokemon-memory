@@ -22,7 +22,6 @@ type GenSelect = {
 }
 
 const hasDuplicate = (pokemonList: Pokemon[], pokemonId: number): boolean => {
-  (pokemonList.find(pokemon => pokemon.id === pokemonId)) ? console.log('duplicate found') : console.log('no duplicate');
   return (pokemonList.find(pokemon => pokemon.id === pokemonId)) ? true : false;
 }
 
@@ -32,7 +31,6 @@ const totalPokemonCount = pokemonFullList.length;
 function App() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
   const [add, setAdd] = useState<boolean>(false);
-  const [pool, setPool] = useState<Pokemon[]>(pokemonFullList);
   const [generations, setGenerations] = useState<GenSelect>({
     1: true,
     2: true,
@@ -49,7 +47,7 @@ function App() {
   // create pool from selected generations
   const allGenerationsArr: string[] = Object.keys(Object.fromEntries(Object.entries(generations)));
   const selectedGenerations: number[] = Object.keys(Object.fromEntries(Object.entries(generations).filter(([generation, value]) => value === true))).map(genAsStr => Number.parseInt(genAsStr));
-  console.log('Gens: ', selectedGenerations);
+
   // Select samples from generations
   const poolFromGenerations = pokemonFullList.filter(pokemon => selectedGenerations.includes(pokemon.generation));
 
