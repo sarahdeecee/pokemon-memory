@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 
 const totalPokemonCount = 1015;
 const capitalize = (string: string): string => {
@@ -42,12 +42,12 @@ function App() {
     setAdd(false);
   }
 
-  const pokemonList = pokemon.map(pokemon => <p key={pokemon.id}>{pokemon.name}</p>)
+  const pokemonList = pokemon.map(pokemon => <Typography variant="body1" key={pokemon.id}>{pokemon.name}</Typography>)
   
   return (
     <div className="App">
-      <p>Pokemon from Memory</p>
-      <p>{pokemonList}</p>
+      <Typography variant="h3" component="h1">Random Pokemon Generator</Typography>
+      {pokemonList}
       <Button onClick={handleAddPokemon}>Next</Button>
       <Button onClick={handleReset}>Reset</Button>
     </div>
