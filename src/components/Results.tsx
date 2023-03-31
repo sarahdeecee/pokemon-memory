@@ -7,7 +7,7 @@ function Results(props: any) {
   return (
     <div>
       <Typography variant='h3'>{name}</Typography>
-      {button}
+      {!empty && button}
       {reveal && <img src={imgSrc} alt={`Illustration of ${name}`} className="Results" hidden={!name} />}
     </div>
   );
