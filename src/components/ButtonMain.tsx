@@ -5,7 +5,11 @@ function ButtonMain(props: any) {
 
   return (
     <Grid item className="btn-main">
-      <Button onClick={func}>{label}</Button>
+      <Button
+        size='large'
+        onClick={func}
+        sx={{width: '200px'}}
+      >{label}</Button>
     </Grid>
   );
 }

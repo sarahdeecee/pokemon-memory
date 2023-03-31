@@ -112,7 +112,7 @@ function App() {
     revealImg ? setRevealImg(false) : setRevealImg(true);
   }
 
-  const pokemonList = pokemon.map(pokemon => <Typography variant='body1' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
+  const pokemonList = pokemon.map(pokemon => <Typography variant='h3' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
   const currentPokemon = <Results currentPokemon={pokemon[pokemon.length - 1]} />
 
   const revealOrHideButton = () => {
