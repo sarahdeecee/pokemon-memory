@@ -17,7 +17,7 @@ function Header(props: any) {
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             Pokemon Generator
           </Typography>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -25,7 +25,7 @@ function Header(props: any) {
             sx={{ ml: 2 }}
           >
             <Settings />
-          </IconButton>
+          </IconButton> */}
         </Toolbar>
       </AppBar>
     </Box>
