@@ -115,7 +115,7 @@ function App() {
   const currentPokemon = <Results currentPokemon={pokemon[pokemon.length - 1]} />
 
   const revealOrHideButton = () => {
-    return revealImg ? <Grid item><Button onClick={handleRevealImg}>Hide</Button></Grid> : <Grid item><Button onClick={handleRevealImg}>Reveal</Button></Grid>;
+    return <ButtonMain func={handleRevealImg} label={revealImg ? "Hide" : "Reveal"} />;
   }
 
   return (
