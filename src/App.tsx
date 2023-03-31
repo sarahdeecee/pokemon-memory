@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import './App.scss';
-import { AppBar, BottomNavigation, BottomNavigationAction, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, Toolbar, Typography } from '@mui/material';
+import { AppBar, BottomNavigation, BottomNavigationAction, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, Toolbar, Typography } from '@mui/material';
 import { pokemonGen1 } from './data/PokemonGen1';
 import { pokemonListGen2 } from './data/PokemonGen2';
 import { pokemonListGen3 } from './data/PokemonGen3';
@@ -121,7 +121,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header handleOptions={handleOptions} />
+      <Header />
       <Grid container className="Main" sx={{height: '100%', my: '5vh', justifyContent: 'space-between'}}>
         <Grid item xs={12}>
           {pokemon && currentPokemon}
@@ -142,10 +142,13 @@ function App() {
       </Dialog>
       <>
         {/* <AppBar position="fixed" sx={{ top: 'auto', bottom: 0 }}> */}
-          <Toolbar sx={{width: 'inherit', display: 'flex', justifyContent: 'space-evenly'}}>
+          <Toolbar sx={{width: 'inherit', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
             {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
               <ButtonMain func={handleAddPokemon} label="Generate" />
-              {pokemon.length > 0 && <ButtonMain func={handleReset} label="Reset" />}
+              <Box sx={{display: 'flex', flexDirection: 'row'}}>
+                {pokemon.length > 0 && <ButtonMain func={handleReset} label="Reset" />}
+                <ButtonMain func={handleOptions} label="Options" />
+              </Box>
           </Toolbar>
         {/* </AppBar> */}
       </>
