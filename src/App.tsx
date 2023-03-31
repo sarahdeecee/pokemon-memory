@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, Typography } from '@mui/material';
+import './App.scss';
+import { AppBar, BottomNavigation, BottomNavigationAction, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, Toolbar, Typography } from '@mui/material';
 import { pokemonGen1 } from './data/PokemonGen1';
 import { pokemonListGen2 } from './data/PokemonGen2';
 import { pokemonListGen3 } from './data/PokemonGen3';
@@ -12,6 +13,8 @@ import { pokemonListGen8 } from './data/PokemonGen8';
 import { pokemonListGen9 } from './data/PokemonGen9';
 import Options from './components/Options';
 import Results from './components/Results';
+import ButtonMain from './components/ButtonMain';
+import Header from './components/Header';
 
 const capitalize = (string: string): string => {
   return string[0].toUpperCase() + string.slice(1,string.length);
@@ -121,29 +124,23 @@ function App() {
     revealImg ? setRevealImg(false) : setRevealImg(true);
   }
 
-  const pokemonList = pokemon.map(pokemon => <Typography variant='body1' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
-  const currentPokemon = <Results currentPokemon={pokemon[pokemon.length - 1]} />
-
+  const pokemonList = [...pokemon].slice(0,-1).map(pokemon => <Typography variant='h6' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
+  
   const revealOrHideButton = () => {
-    return revealImg ? <Grid item><Button onClick={handleRevealImg}>Hide</Button></Grid> : <Grid item><Button onClick={handleRevealImg}>Reveal</Button></Grid>;
+    return <ButtonMain func={handleRevealImg} label={revealImg ? "Hide" : "Reveal"} />;
   }
+  const currentPokemon = <Results empty={pokemon.length === 0} currentPokemon={pokemon[pokemon.length - 1]} reveal={revealImg} button={revealOrHideButton()} />
 
   return (
     <div className="App">
-      <Typography variant='h3' component='h1' align='center'>Pokemon From Memory</Typography>
-      {pokemonList}
-      {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
-      <Grid>
-        {pokemon.length !== 0 && revealOrHideButton()}
-        {revealImg && currentPokemon}
-        <Grid item>
-          <Button onClick={handleAddPokemon}>Next</Button>
+      <Header />
+      <Grid container className="Main" sx={{height: '100%', my: '5vh', justifyContent: 'space-between'}}>
+        <Grid item xs={12}>
+          {pokemon && currentPokemon}
         </Grid>
-        <Grid item>
-          <Button onClick={handleReset}>Reset</Button>
-        </Grid>
-        <Grid item>
-          <Button onClick={handleOptions}>Options</Button>
+        <Grid item xs={12}>
+          {pokemon.length > 1 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
+          {pokemonList}
         </Grid>
       </Grid>
       <Dialog onClose={handleOptionsClose} open={optionsOpen}>
@@ -155,6 +152,18 @@ function App() {
           <Button onClick={handleOptionsClose}>Close</Button>
         </DialogActions>
       </Dialog>
+      <>
+        {/* <AppBar position="fixed" sx={{ top: 'auto', bottom: 0 }}> */}
+          <Toolbar sx={{width: 'inherit', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
+            {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
+              <ButtonMain func={handleAddPokemon} label="Generate" />
+              <Box sx={{display: 'flex', flexDirection: 'row'}}>
+                {pokemon.length > 0 && <ButtonMain func={handleReset} label="Reset" />}
+                <ButtonMain func={handleOptions} label="Options" />
+              </Box>
+          </Toolbar>
+        {/* </AppBar> */}
+      </>
     </div>
   );
 }

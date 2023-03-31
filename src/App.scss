@@ -1,0 +1,45 @@
+/* colors */
+$blue: #0D698B;
+$ivory: #F2F1E8;
+$dark-blue: #050533;
+$cinnabar: #E34234;
+
+html {
+  scroll-behavior: smooth;
+  height: 100vh;
+}
+
+body {
+  background-color: $ivory;
+  margin: 0;
+}
+
+body, #root, .App {
+  min-height: 100vh;
+}
+
+h1 {
+  color:#0D698B
+}
+button.MuiButton-root {
+  text-transform: none;
+  font-weight: bold;
+  color: $ivory;
+  background-color: $blue;
+  &:hover {
+    background-color: $cinnabar;
+  }
+}
+header {
+  background-color: $blue !important;
+}
+
+div.Main {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.Results {
+  max-width: 95vw;
+}
