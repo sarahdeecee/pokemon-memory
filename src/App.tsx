@@ -13,6 +13,7 @@ import { pokemonListGen8 } from './data/PokemonGen8';
 import { pokemonListGen9 } from './data/PokemonGen9';
 import Options from './components/Options';
 import Results from './components/Results';
+import ButtonMain from './components/ButtonMain';
 
 const capitalize = (string: string): string => {
   return string[0].toUpperCase() + string.slice(1,string.length);
@@ -125,15 +126,9 @@ function App() {
       <Grid>
         {pokemon.length !== 0 && revealOrHideButton()}
         {revealImg && currentPokemon}
-        <Grid item>
-          <Button onClick={handleAddPokemon}>Next</Button>
-        </Grid>
-        <Grid item>
-          <Button onClick={handleReset}>Reset</Button>
-        </Grid>
-        <Grid item>
-          <Button onClick={handleOptions}>Options</Button>
-        </Grid>
+        <ButtonMain func={handleAddPokemon} label="Next" />
+        <ButtonMain func={handleReset} label="Reset" />
+        <ButtonMain func={handleOptions} label="Options" />
       </Grid>
       <Dialog onClose={handleOptionsClose} open={optionsOpen}>
         <DialogTitle>Select Generations</DialogTitle>
