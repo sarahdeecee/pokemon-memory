@@ -129,7 +129,7 @@ function App() {
           {pokemon.length !== 0 && revealOrHideButton()}
           {revealImg && currentPokemon}
           <ButtonMain func={handleAddPokemon} label="Next" />
-          <ButtonMain func={handleReset} label="Reset" />
+          {pokemon.length > 0 && <ButtonMain func={handleReset} label="Reset" />}
         </Grid>
         <Dialog onClose={handleOptionsClose} open={optionsOpen}>
           <DialogTitle>Select Generations</DialogTitle>
