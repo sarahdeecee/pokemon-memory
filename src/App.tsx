@@ -138,7 +138,7 @@ function App() {
         <Grid item xs={12}>
           {pokemon && currentPokemon}
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{mt: '5vh'}}>
           {pokemon.length > 1 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
           {pokemonList}
         </Grid>
@@ -154,7 +154,7 @@ function App() {
       </Dialog>
       <>
         {/* <AppBar position="fixed" sx={{ top: 'auto', bottom: 0 }}> */}
-          <Toolbar sx={{width: 'inherit', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
+          <Toolbar sx={{bottom: 0, width: 'inherit', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
             {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
               <ButtonMain func={handleAddPokemon} label="Generate" />
               <Box sx={{display: 'flex', flexDirection: 'row'}}>
