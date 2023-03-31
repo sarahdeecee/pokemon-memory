@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import './App.scss';
-import { AppBar, BottomNavigation, BottomNavigationAction, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, Toolbar, Typography } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Typography } from '@mui/material';
 import { pokemonGen1 } from './data/PokemonGen1';
 import { pokemonListGen2 } from './data/PokemonGen2';
 import { pokemonListGen3 } from './data/PokemonGen3';
@@ -22,12 +22,12 @@ const capitalize = (string: string): string => {
 }
 
 const camelCase = (string: string): string => {
-  const strArr = string.split(' ');
+  const strArr = string.split(/-| /);
   const camelStrArr = [];
   for (let str of strArr) {
     camelStrArr.push(str[0].toUpperCase() + str.slice(1,str.length));
     if (strArr.indexOf(str) < strArr.length - 1) { // Re-add space if not last word
-      camelStrArr.push(' ')
+      camelStrArr.push(' ');
     }
   }
   return camelStrArr.join('');
@@ -39,6 +39,7 @@ type Pokemon = {
   generation: number,
   imgSrc?: string
 };
+
 type GenSelect = {
   [key: string]: boolean
 }
@@ -68,7 +69,6 @@ function App() {
   const [revealImg, setRevealImg] = useState<boolean>(false);
 
   // create pool from selected generations
-  const allGenerationsArr: string[] = Object.keys(Object.fromEntries(Object.entries(generations)));
   const selectedGenerations: number[] = Object.keys(Object.fromEntries(Object.entries(generations).filter(([generation, value]) => value === true))).map(genAsStr => Number.parseInt(genAsStr));
 
   // Select samples from generations
@@ -92,7 +92,7 @@ function App() {
           (result) => {
             const newPokemonImg: string = result.sprites.other["official-artwork"]["front_default"];
             // Add new pokemon to list
-            const newPokemon: Pokemon = {...randomPokemon, name: capitalize(poolFromGenerations[randomNumber].name), imgSrc: newPokemonImg};
+            const newPokemon: Pokemon = {...randomPokemon, name: camelCase(poolFromGenerations[randomNumber].name), imgSrc: newPokemonImg};
             setPokemon([...pokemon, newPokemon]);
             setAdd(false);
             },
