@@ -23,8 +23,12 @@ h1 {
 }
 button.MuiButton-root {
   text-transform: none;
+  font-weight: bold;
   color: $ivory;
   background-color: $blue;
+  &:hover {
+    background-color: $cinnabar;
+  }
 }
 header {
   background-color: $blue !important;

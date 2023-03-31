@@ -7,6 +7,7 @@ function ButtonMain(props: any) {
     <Grid item className="btn-main">
       <Button
         size='large'
+        variant='contained'
         onClick={func}
         sx={{width: '150px', m: '10px'}}
       >{label}</Button>
