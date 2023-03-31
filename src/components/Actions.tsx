@@ -6,7 +6,7 @@ function Actions(props: any) {
   const empty = pokemon.length === 0 ? true : false;
 
   return (
-    <Toolbar sx={{bottom: 0, width: 'inherit', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
+    <Toolbar disableGutters sx={{ width: 'inherit', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
       {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
         <ButtonMain func={add} label="Generate" />
         <Box sx={{display: 'flex', flexDirection: 'row'}}>

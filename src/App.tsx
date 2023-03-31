@@ -140,6 +140,7 @@ function App() {
           {pokemon.length === 0 && <Typography variant='h5'>Click 'Generate' to generate a Pokemon.</Typography>}
           {pokemon && currentPokemon}
         </Grid>
+        <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleOptions} />
         <Grid item xs={12} sx={{mt: '5vh'}}>
           {pokemon.length > 1 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
           {pokemonList}
@@ -154,7 +155,6 @@ function App() {
           <Button onClick={handleOptionsClose}>Close</Button>
         </DialogActions>
       </Dialog>
-      <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleOptions} />
     </div>
   );
 }
