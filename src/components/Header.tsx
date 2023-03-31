@@ -3,7 +3,7 @@ import { Menu, Settings } from '@mui/icons-material';
 function Header(props: any) {
   const {handleOptions} = props;
   return (
-    <Box sx={{ flexGrow: 1, mb: 5 }} className="header">
+    <Box sx={{ flexGrow: 1}} className="header">
       <AppBar position="static">
         <Toolbar>
           <IconButton

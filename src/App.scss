@@ -6,12 +6,18 @@ $cinnabar: #E34234;
 
 html {
   scroll-behavior: smooth;
+  height: 100vh;
 }
 
 body {
   background-color: $ivory;
   margin: 0;
 }
+
+body, #root, .App {
+  min-height: 100vh;
+}
+
 h1 {
   color:#0D698B
 }
@@ -20,15 +26,21 @@ button.MuiButton-root {
   color: $ivory;
   background-color: $blue;
 }
-.btn-main {
-  padding: 10px;
-}
 header {
   background-color: $blue !important;
 }
 
-.Main {
+div.Main {
+  // margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+  // flex-wrap: nowrap;
   text-align: center;
+  // justify-content: space-between;
+  // align-items: center;
+  // max-height: 100vh;
+  // height: 100%;
+  // height: inherit;
 }
 
 .Results {

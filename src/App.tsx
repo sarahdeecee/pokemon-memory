@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import './App.scss';
-import { Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, Typography } from '@mui/material';
+import { AppBar, BottomNavigation, BottomNavigationAction, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, Toolbar, Typography } from '@mui/material';
 import { pokemonGen1 } from './data/PokemonGen1';
 import { pokemonListGen2 } from './data/PokemonGen2';
 import { pokemonListGen3 } from './data/PokemonGen3';
@@ -112,8 +112,8 @@ function App() {
     revealImg ? setRevealImg(false) : setRevealImg(true);
   }
 
-  const pokemonList = pokemon.map(pokemon => <Typography variant='h3' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
-  const currentPokemon = <Results currentPokemon={pokemon[pokemon.length - 1]} />
+  const pokemonList = [...pokemon].slice(0,-1).map(pokemon => <Typography variant='h6' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
+  const currentPokemon = <Results currentPokemon={pokemon[pokemon.length - 1]} reveal={revealImg} />
 
   const revealOrHideButton = () => {
     return <ButtonMain func={handleRevealImg} label={revealImg ? "Hide" : "Reveal"} />;
@@ -122,25 +122,42 @@ function App() {
   return (
     <div className="App">
       <Header handleOptions={handleOptions} />
-      <div className="Main">
-        {pokemonList}
-        {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
-        <Grid>
+      <Grid container className="Main" sx={{height: '100%', my: '5vh', justifyContent: 'space-between'}}>
+        <Grid item xs={12}>
+          {pokemon && currentPokemon}
+        </Grid>
+        {/* <Grid item xs={12}>
+          {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
           {pokemon.length !== 0 && revealOrHideButton()}
           {revealImg && currentPokemon}
           <ButtonMain func={handleAddPokemon} label="Next" />
           {pokemon.length > 0 && <ButtonMain func={handleReset} label="Reset" />}
+        </Grid> */}
+        <Grid item xs={12}>
+          {pokemon.length > 1 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
+          {pokemonList}
         </Grid>
-        <Dialog onClose={handleOptionsClose} open={optionsOpen}>
-          <DialogTitle>Select Generations</DialogTitle>
-          <DialogContent>
-            <Options generations={generations} setGenerations={setGenerations} />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleOptionsClose}>Close</Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+      </Grid>
+      <Dialog onClose={handleOptionsClose} open={optionsOpen}>
+        <DialogTitle>Select Generations</DialogTitle>
+        <DialogContent>
+          <Options generations={generations} setGenerations={setGenerations} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleOptionsClose}>Close</Button>
+        </DialogActions>
+      </Dialog>
+      <>
+        <AppBar position="fixed" sx={{ top: 'auto', bottom: 0 }}>
+          <Toolbar>
+            {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
+              {pokemon.length !== 0 && revealOrHideButton()}
+              <ButtonMain func={handleAddPokemon} label="Next" />
+              {pokemon.length > 0 && <ButtonMain func={handleReset} label="Reset" />}
+          </Toolbar>
+        </AppBar>
+        <Toolbar />
+      </>
     </div>
   );
 }

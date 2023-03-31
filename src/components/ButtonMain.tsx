@@ -8,7 +8,7 @@ function ButtonMain(props: any) {
       <Button
         size='large'
         onClick={func}
-        sx={{width: '200px'}}
+        sx={{width: '200px', m: '10px'}}
       >{label}</Button>
     </Grid>
   );
