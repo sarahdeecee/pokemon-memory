@@ -1,7 +1,7 @@
 import { AppBar, Box, Button, Grid, IconButton, Toolbar, Typography } from '@mui/material';
 import { Menu, Settings } from '@mui/icons-material';
 function Header(props: any) {
-
+  const {handleOptions} = props;
   return (
     <Box sx={{ flexGrow: 1 }} className="header">
       <AppBar position="static">
@@ -24,6 +24,7 @@ function Header(props: any) {
             color="inherit"
             aria-label="menu"
             sx={{ ml: 2 }}
+            onClick={handleOptions}
           >
             <Settings />
           </IconButton>

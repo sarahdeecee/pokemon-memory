@@ -121,7 +121,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header handleOptions={handleOptions} />
       <div className="Main">
         {pokemonList}
         {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
@@ -130,7 +130,6 @@ function App() {
           {revealImg && currentPokemon}
           <ButtonMain func={handleAddPokemon} label="Next" />
           <ButtonMain func={handleReset} label="Reset" />
-          <ButtonMain func={handleOptions} label="Options" />
         </Grid>
         <Dialog onClose={handleOptionsClose} open={optionsOpen}>
           <DialogTitle>Select Generations</DialogTitle>
