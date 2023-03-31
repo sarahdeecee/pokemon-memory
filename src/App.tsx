@@ -126,13 +126,6 @@ function App() {
         <Grid item xs={12}>
           {pokemon && currentPokemon}
         </Grid>
-        {/* <Grid item xs={12}>
-          {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
-          {pokemon.length !== 0 && revealOrHideButton()}
-          {revealImg && currentPokemon}
-          <ButtonMain func={handleAddPokemon} label="Next" />
-          {pokemon.length > 0 && <ButtonMain func={handleReset} label="Reset" />}
-        </Grid> */}
         <Grid item xs={12}>
           {pokemon.length > 1 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
           {pokemonList}
@@ -148,14 +141,13 @@ function App() {
         </DialogActions>
       </Dialog>
       <>
-        <AppBar position="fixed" sx={{ top: 'auto', bottom: 0 }}>
-          <Toolbar sx={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
+        {/* <AppBar position="fixed" sx={{ top: 'auto', bottom: 0 }}> */}
+          <Toolbar sx={{width: 'inherit', display: 'flex', justifyContent: 'space-evenly'}}>
             {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
-              <ButtonMain func={handleAddPokemon} label="Next" />
-              <ButtonMain func={handleReset} label="Reset" />
+              <ButtonMain func={handleAddPokemon} label="Generate" />
+              {pokemon.length > 0 && <ButtonMain func={handleReset} label="Reset" />}
           </Toolbar>
-        </AppBar>
-        <Toolbar />
+        {/* </AppBar> */}
       </>
     </div>
   );
