@@ -136,6 +136,7 @@ function App() {
       <Header />
       <Grid container className="Main" sx={{height: '100%', my: '5vh', justifyContent: 'space-between'}}>
         <Grid item xs={12}>
+          {pokemon.length === 0 && <Typography variant='h5'>Click 'Generate' to generate a Pokemon.</Typography>}
           {pokemon && currentPokemon}
         </Grid>
         <Grid item xs={12} sx={{mt: '5vh'}}>
