@@ -5,6 +5,7 @@ function Results(props: any) {
   const {name, id, generation, imgSrc} = currentPokemon ?? '';
   
   const displayType = reveal ? 'inline' : 'none';
+  
   return (
     <div>
       <Typography variant='h3'>{name}</Typography>
