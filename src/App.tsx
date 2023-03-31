@@ -152,18 +152,14 @@ function App() {
           <Button onClick={handleOptionsClose}>Close</Button>
         </DialogActions>
       </Dialog>
-      <>
-        {/* <AppBar position="fixed" sx={{ top: 'auto', bottom: 0 }}> */}
-          <Toolbar sx={{bottom: 0, width: 'inherit', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
-            {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
-              <ButtonMain func={handleAddPokemon} label="Generate" />
-              <Box sx={{display: 'flex', flexDirection: 'row'}}>
-                {pokemon.length > 0 && <ButtonMain func={handleReset} label="Reset" />}
-                <ButtonMain func={handleOptions} label="Options" />
-              </Box>
-          </Toolbar>
-        {/* </AppBar> */}
-      </>
+      <Toolbar sx={{bottom: 0, width: 'inherit', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
+        {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
+          <ButtonMain func={handleAddPokemon} label="Generate" />
+          <Box sx={{display: 'flex', flexDirection: 'row'}}>
+            {pokemon.length > 0 && <ButtonMain func={handleReset} label="Reset" />}
+            <ButtonMain func={handleOptions} label="Options" />
+          </Box>
+      </Toolbar>
     </div>
   );
 }
