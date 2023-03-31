@@ -10,15 +10,27 @@ html {
 
 body {
   background-color: $ivory;
+  margin: 0;
 }
 h1 {
   color:#0D698B
 }
-.MuiButton-root {
-  text-transform: none !important;
-  color: $ivory !important;
-  background-color: $blue !important;
+button.MuiButton-root {
+  text-transform: none;
+  color: $ivory;
+  background-color: $blue;
 }
 .btn-main {
   padding: 10px;
+}
+header {
+  background-color: $blue !important;
+}
+
+.Main {
+  text-align: center;
+}
+
+.Results {
+  max-width: 95vw;
 }

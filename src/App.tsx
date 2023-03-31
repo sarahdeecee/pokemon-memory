@@ -14,6 +14,7 @@ import { pokemonListGen9 } from './data/PokemonGen9';
 import Options from './components/Options';
 import Results from './components/Results';
 import ButtonMain from './components/ButtonMain';
+import Header from './components/Header';
 
 const capitalize = (string: string): string => {
   return string[0].toUpperCase() + string.slice(1,string.length);
@@ -120,25 +121,27 @@ function App() {
 
   return (
     <div className="App">
-      <Typography variant='h3' component='h1' align='center'>Pokemon From Memory</Typography>
-      {pokemonList}
-      {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
-      <Grid>
-        {pokemon.length !== 0 && revealOrHideButton()}
-        {revealImg && currentPokemon}
-        <ButtonMain func={handleAddPokemon} label="Next" />
-        <ButtonMain func={handleReset} label="Reset" />
-        <ButtonMain func={handleOptions} label="Options" />
-      </Grid>
-      <Dialog onClose={handleOptionsClose} open={optionsOpen}>
-        <DialogTitle>Select Generations</DialogTitle>
-        <DialogContent>
-          <Options generations={generations} setGenerations={setGenerations} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleOptionsClose}>Close</Button>
-        </DialogActions>
-      </Dialog>
+      <Header />
+      <div className="Main">
+        {pokemonList}
+        {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
+        <Grid>
+          {pokemon.length !== 0 && revealOrHideButton()}
+          {revealImg && currentPokemon}
+          <ButtonMain func={handleAddPokemon} label="Next" />
+          <ButtonMain func={handleReset} label="Reset" />
+          <ButtonMain func={handleOptions} label="Options" />
+        </Grid>
+        <Dialog onClose={handleOptionsClose} open={optionsOpen}>
+          <DialogTitle>Select Generations</DialogTitle>
+          <DialogContent>
+            <Options generations={generations} setGenerations={setGenerations} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleOptionsClose}>Close</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </div>
   );
 }
