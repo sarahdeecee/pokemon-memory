@@ -113,11 +113,11 @@ function App() {
   }
 
   const pokemonList = [...pokemon].slice(0,-1).map(pokemon => <Typography variant='h6' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
-  const currentPokemon = <Results currentPokemon={pokemon[pokemon.length - 1]} reveal={revealImg} />
-
+  
   const revealOrHideButton = () => {
     return <ButtonMain func={handleRevealImg} label={revealImg ? "Hide" : "Reveal"} />;
   }
+  const currentPokemon = <Results empty={pokemon.length === 0} currentPokemon={pokemon[pokemon.length - 1]} reveal={revealImg} button={revealOrHideButton()} />
 
   return (
     <div className="App">
@@ -149,11 +149,10 @@ function App() {
       </Dialog>
       <>
         <AppBar position="fixed" sx={{ top: 'auto', bottom: 0 }}>
-          <Toolbar>
+          <Toolbar sx={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
             {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
-              {pokemon.length !== 0 && revealOrHideButton()}
               <ButtonMain func={handleAddPokemon} label="Next" />
-              {pokemon.length > 0 && <ButtonMain func={handleReset} label="Reset" />}
+              <ButtonMain func={handleReset} label="Reset" />
           </Toolbar>
         </AppBar>
         <Toolbar />
