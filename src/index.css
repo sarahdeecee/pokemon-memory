@@ -1,5 +1,4 @@
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -12,15 +11,3 @@ code {
     monospace;
 }
 
-/* colors */
-/* Blue Grotto
-0D698B
-
-Ivory
-F2F1E8
-
-Dark Blue
-050533
-
-Cinnabar
-E34234 */
