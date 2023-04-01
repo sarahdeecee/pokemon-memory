@@ -43,4 +43,4 @@ Users can "roll" Pokemon names from a pool of all Pokemon and reveal a picture o
 - Material UI
 
 ## Notes
-- Will likely use the [Pokemon API](https://pokeapi.co/)
+- Uses [PokeAPI](https://pokeapi.co/)
