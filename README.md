@@ -19,12 +19,14 @@ Users can "roll" Pokemon names from a pool of all Pokemon and reveal a picture o
 | :black_square_button: | Users can select a number of Pokemon per match (remove rolled Pokemon from pool each round) |
 | :white_check_mark: | Users can choose which generations to play from |
 | :white_check_mark: | Users can see picture(s) of the Pokemon after each round |
+| :white_check_mark: | Users can select which already rolled Pokemon to see pictures/information for |
 | :black_square_button: | Users can set timers for each round |
 
 ### Stretch
 | :white_check_mark: | User Story |
 | --- | --- |
 | :black_square_button: | Different users can access the same rolls by link |
+| :black_square_button: | Users can upload digital images of their drawings, categorized by species |
 
 ## Developer Goals
 - Practice TypeScript
@@ -35,8 +37,10 @@ Users can "roll" Pokemon names from a pool of all Pokemon and reveal a picture o
 - JavaScript
 - TypeScript
 - React
+- SASS
 - HTML5
 - CSS3
+- Material UI
 
 ## Notes
 - Will likely use the [Pokemon API](https://pokeapi.co/)
