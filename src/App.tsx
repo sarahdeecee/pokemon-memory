@@ -140,7 +140,12 @@ function App() {
     revealImg ? setRevealImg(false) : setRevealImg(true);
   }
 
-  const pokemonList = pokemon.map(pokemon => <Typography variant='h6' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
+  const handleSelectPokemon = (id: number): void => {
+    const selectedPokemon = pokemon.find(pokemon => pokemon.id === id);
+    setCurrentPokemon(selectedPokemon ?? null);
+  }
+
+  const pokemonList = pokemon.map(pokemon => <Typography variant='h6' key={pokemon.id} align='center' onClick={() => handleSelectPokemon(pokemon.id)}>{pokemon.name}</Typography>);
   
   const revealOrHideButton = () => {
     return <ButtonMain func={handleRevealImg} label={revealImg ? "Hide" : "Reveal"} />;
