@@ -10,8 +10,8 @@ function Actions(props: any) {
       {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
         <ButtonMain func={add} label="Generate" />
         <Box sx={{display: 'flex', flexDirection: 'row'}}>
-          {!empty && <ButtonMain func={reset} label="Reset" />}
-          <ButtonMain func={options} label="Options" />
+          {!empty && <ButtonMain func={() => options('reset')} label="Reset" />}
+          <ButtonMain func={() => options('select')} label="Options" />
         </Box>
     </Toolbar>
   );

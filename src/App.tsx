@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import './App.scss';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Typography } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Typography } from '@mui/material';
 import { pokemonGen1 } from './data/PokemonGen1';
 import { pokemonListGen2 } from './data/PokemonGen2';
 import { pokemonListGen3 } from './data/PokemonGen3';
@@ -44,6 +44,11 @@ type GenSelect = {
   [key: string]: boolean
 }
 
+type DialogSet = {
+  content: string,
+  open: boolean
+}
+
 const hasDuplicate = (pokemonList: Pokemon[], pokemonId: number): boolean => {
   return (pokemonList.find(pokemon => pokemon.id === pokemonId)) ? true : false;
 }
@@ -65,7 +70,10 @@ function App() {
     8: true,
     9: true,
   });
-  const [optionsOpen, setOptionsOpen] = useState<boolean>(false);
+  const [dialog, setDialog] = useState<DialogSet>({
+    content: '',
+    open: false
+  });
   const [revealImg, setRevealImg] = useState<boolean>(false);
 
   // create pool from selected generations
@@ -109,16 +117,21 @@ function App() {
   }
 
   const handleReset = () => {
+    handleDialogClose();
     setPokemon([]);
     setAdd(false);
   }
 
-  const handleOptions = () => {
-    setOptionsOpen(true);
+  const handleDialog = (content: string) => {
+    if (content === 'reset') {
+      setDialog({...dialog, content: 'reset', open: true})
+    } else if (content === 'select') {
+      setDialog({...dialog, content: 'select', open: true})
+    }
   }
 
-  const handleOptionsClose = () => {
-    setOptionsOpen(false);
+  const handleDialogClose = () => {
+    setDialog({...dialog, open: false});
   }
 
   const handleRevealImg = () => {
@@ -132,6 +145,33 @@ function App() {
   }
   const currentPokemon = <Results empty={pokemon.length === 0} currentPokemon={pokemon[pokemon.length - 1]} reveal={revealImg} button={revealOrHideButton()} />
 
+  const resetConfirm = <>
+    <DialogTitle id="alert-dialog-title">
+      {"Are you sure you want to reset?"}
+    </DialogTitle>
+    <DialogContent>
+      <DialogContentText id="alert-dialog-description">
+        Your current list of Pokemon will be reset. Do you want to reset?
+      </DialogContentText>
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={handleDialogClose}>Cancel</Button>
+      <Button onClick={handleReset} autoFocus>
+        Confirm
+      </Button>
+    </DialogActions>
+  </>
+
+  const selectGenerations = <>
+    <DialogTitle>Select Generations</DialogTitle>
+    <DialogContent>
+      <Options generations={generations} setGenerations={setGenerations} />
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={handleDialogClose}>Close</Button>
+    </DialogActions>
+  </>
+
   return (
     <div className="App">
       <Header />
@@ -140,20 +180,14 @@ function App() {
           {pokemon.length === 0 && <Typography variant='h5'>Click 'Generate' to generate a Pokemon.</Typography>}
           {pokemon && currentPokemon}
         </Grid>
-        <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleOptions} />
-        <Grid item xs={12} sx={{mt: '5vh'}}>
+        <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleDialog} />
+        <Grid item xs={12} sx={{mt: '2vh', mb: '5vh'}}>
           {pokemon.length > 0 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
           {pokemonList}
         </Grid>
       </Grid>
-      <Dialog onClose={handleOptionsClose} open={optionsOpen}>
-        <DialogTitle>Select Generations</DialogTitle>
-        <DialogContent>
-          <Options generations={generations} setGenerations={setGenerations} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleOptionsClose}>Close</Button>
-        </DialogActions>
+      <Dialog onClose={handleDialogClose} open={dialog.open}>
+        {(dialog.content === 'select') ? selectGenerations : resetConfirm}
       </Dialog>
     </div>
   );
