@@ -125,7 +125,7 @@ function App() {
     revealImg ? setRevealImg(false) : setRevealImg(true);
   }
 
-  const pokemonList = [...pokemon].slice(0,-1).map(pokemon => <Typography variant='h6' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
+  const pokemonList = pokemon.map(pokemon => <Typography variant='h6' key={pokemon.id} align='center'>{pokemon.name}</Typography>)
   
   const revealOrHideButton = () => {
     return <ButtonMain func={handleRevealImg} label={revealImg ? "Hide" : "Reveal"} />;
@@ -142,7 +142,7 @@ function App() {
         </Grid>
         <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleOptions} />
         <Grid item xs={12} sx={{mt: '5vh'}}>
-          {pokemon.length > 1 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
+          {pokemon.length > 0 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
           {pokemonList}
         </Grid>
       </Grid>
