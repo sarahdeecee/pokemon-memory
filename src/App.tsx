@@ -58,6 +58,7 @@ const totalPokemonCount = pokemonFullList.length;
 
 function App() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
+  const [currentPokemon, setCurrentPokemon] = useState<Pokemon | null>(null);
   const [add, setAdd] = useState<boolean>(false);
   const [generations, setGenerations] = useState<GenSelect>({
     1: true,
@@ -101,6 +102,7 @@ function App() {
             const newPokemonImg: string = result.sprites.other["official-artwork"]["front_default"];
             // Add new pokemon to list
             const newPokemon: Pokemon = {...randomPokemon, name: camelCase(poolFromGenerations[randomNumber].name), imgSrc: newPokemonImg};
+            setCurrentPokemon(newPokemon);
             setPokemon([...pokemon, newPokemon]);
             setAdd(false);
             },
@@ -143,7 +145,7 @@ function App() {
   const revealOrHideButton = () => {
     return <ButtonMain func={handleRevealImg} label={revealImg ? "Hide" : "Reveal"} />;
   }
-  const currentPokemon = <Results empty={pokemon.length === 0} currentPokemon={pokemon[pokemon.length - 1]} reveal={revealImg} button={revealOrHideButton()} />
+  const pokemonResults = <Results empty={pokemon.length === 0} currentPokemon={currentPokemon} reveal={revealImg} button={revealOrHideButton()} />
 
   const resetConfirm = <>
     <DialogTitle id="alert-dialog-title">
@@ -178,7 +180,7 @@ function App() {
       <Grid container className="Main" sx={{height: '100%', my: '5vh', justifyContent: 'space-between'}}>
         <Grid item xs={12}>
           {pokemon.length === 0 && <Typography variant='h5'>Click 'Generate' to generate a Pokemon.</Typography>}
-          {pokemon && currentPokemon}
+          {pokemonResults}
         </Grid>
         <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleDialog} />
         <Grid item xs={12} sx={{mt: '2vh', mb: '5vh'}}>
