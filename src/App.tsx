@@ -16,6 +16,7 @@ import Results from './components/Results';
 import ButtonMain from './components/ButtonMain';
 import Header from './components/Header';
 import Actions from './components/Actions';
+import DialogOptions from './components/DialogOptions';
 
 const capitalize = (string: string): string => {
   return string[0].toUpperCase() + string.slice(1,string.length);
@@ -121,6 +122,7 @@ function App() {
   const handleReset = () => {
     handleDialogClose();
     setPokemon([]);
+    setCurrentPokemon(null);
     setAdd(false);
   }
 
@@ -152,33 +154,6 @@ function App() {
   }
   const pokemonResults = <Results empty={pokemon.length === 0} currentPokemon={currentPokemon} reveal={revealImg} button={revealOrHideButton()} />
 
-  const resetConfirm = <>
-    <DialogTitle id="alert-dialog-title">
-      {"Are you sure you want to reset?"}
-    </DialogTitle>
-    <DialogContent>
-      <DialogContentText id="alert-dialog-description">
-        Your current list of Pokemon will be reset. Do you want to reset?
-      </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-      <Button onClick={handleDialogClose}>Cancel</Button>
-      <Button onClick={handleReset} autoFocus>
-        Confirm
-      </Button>
-    </DialogActions>
-  </>
-
-  const selectGenerations = <>
-    <DialogTitle>Select Generations</DialogTitle>
-    <DialogContent>
-      <Options generations={generations} setGenerations={setGenerations} />
-    </DialogContent>
-    <DialogActions>
-      <Button onClick={handleDialogClose}>Close</Button>
-    </DialogActions>
-  </>
-
   return (
     <div className="App">
       <Header />
@@ -193,9 +168,7 @@ function App() {
           {pokemonList}
         </Grid>
       </Grid>
-      <Dialog onClose={handleDialogClose} open={dialog.open}>
-        {(dialog.content === 'select') ? selectGenerations : resetConfirm}
-      </Dialog>
+      <DialogOptions handleDialogClose={handleDialogClose} dialog={dialog} handleReset={handleReset} generations={generations} setGenerations={setGenerations} />
     </div>
   );
 }
