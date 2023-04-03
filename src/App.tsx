@@ -118,8 +118,10 @@ function App() {
   }, [add]);
 
   const handleAddPokemon = () => {
-    setRevealImg(false);
-    setAdd(true);
+    if (Object.values(generations).includes(true)) {
+      setRevealImg(false);
+      setAdd(true);
+    }
   }
 
   const handleReset = () => {

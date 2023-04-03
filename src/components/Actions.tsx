@@ -7,12 +7,12 @@ function Actions(props: any) {
 
   return (
     <Toolbar disableGutters sx={{ width: 'inherit', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
-      {!Object.values(generations).includes(true) && <Typography variant='body1'>Please select a generation.</Typography>}
-        <ButtonMain func={add} label="Generate" />
-        <Box sx={{display: 'flex', flexDirection: 'row'}}>
-          {!empty && <ButtonMain func={() => options('reset')} label="Reset" />}
-          <ButtonMain func={() => options('select')} label="Options" />
-        </Box>
+      <ButtonMain func={add} label="Generate" />
+      <Box sx={{display: 'flex', flexDirection: 'row'}}>
+        {!empty && <ButtonMain func={() => options('reset')} label="Reset" />}
+        <ButtonMain func={() => options('select')} label="Options" />
+      </Box>
+      {!Object.values(generations).includes(true) && <Typography variant='h6' component='p' className='accent'>Please select a generation.</Typography>}
     </Toolbar>
   );
 }
