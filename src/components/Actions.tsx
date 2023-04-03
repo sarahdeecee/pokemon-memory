@@ -5,9 +5,11 @@ function Actions(props: any) {
   const {generations, pokemon, add, reset, options} = props;
   const empty = pokemon.length === 0 ? true : false;
 
+  const noGenSelected = !Object.values(generations).includes(true);
+
   return (
     <Toolbar disableGutters sx={{ width: 'inherit', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
-      <ButtonMain func={add} label="Generate" />
+      <ButtonMain func={add} label="Generate" disabled={noGenSelected} />
       <Box sx={{display: 'flex', flexDirection: 'row'}}>
         {!empty && <ButtonMain func={() => options('reset')} label="Reset" />}
         <ButtonMain func={() => options('select')} label="Options" />

@@ -1,7 +1,7 @@
 import { Button, Grid } from '@mui/material';
 
 function ButtonMain(props: any) {
-  const {func, label} = props;
+  const {func, label, disabled} = props;
 
   return (
     <Grid item className="btn-main">
@@ -10,6 +10,7 @@ function ButtonMain(props: any) {
         variant='contained'
         onClick={func}
         sx={{width: '150px', m: '10px'}}
+        disabled={disabled}
       >{label}</Button>
     </Grid>
   );
