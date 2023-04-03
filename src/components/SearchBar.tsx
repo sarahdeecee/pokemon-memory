@@ -15,6 +15,7 @@ function SearchBar(props: {pool: Pokemon[]}) {
   return (
     <Autocomplete
       multiple
+      limitTags={2}
       id="searchbar"
       disableCloseOnSelect
       options={pool}
@@ -24,7 +25,6 @@ function SearchBar(props: {pool: Pokemon[]}) {
           <Checkbox
             icon={<CheckBoxOutlineBlank fontSize="small" />}
             checkedIcon={<CheckBox fontSize="small" />}
-            // sx={{ mr: 8 }}
             checked={selected}
           />
           {option.name}
@@ -39,7 +39,7 @@ function SearchBar(props: {pool: Pokemon[]}) {
             type: 'search',
           }}
           />
-          )}
+        )}
       sx={{ width: 500 }}
     />
   );
