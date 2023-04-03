@@ -103,7 +103,7 @@ function App() {
           (result) => {
             const newPokemonImg: string = result.sprites.other["official-artwork"]["front_default"];
             const newPokemonTypesArr: {slot: number, type: {name: string, url: string}}[] = result.types;
-            const newPokemonTypes: string[] = newPokemonTypesArr.map(typeObj => typeObj.type.name);
+            const newPokemonTypes: string[] = newPokemonTypesArr.map(typeObj => camelCase(typeObj.type.name));
             // Add new pokemon to list
             const newPokemon: Pokemon = {...randomPokemon, name: camelCase(poolFromGenerations[randomNumber].name), imgSrc: newPokemonImg, types: newPokemonTypes};
             setCurrentPokemon(newPokemon);

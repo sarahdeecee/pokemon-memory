@@ -4,7 +4,7 @@ function Results(props: any) {
   const {currentPokemon, reveal, empty, button} = props;
   const {name, id, generation, imgSrc, types} = currentPokemon ?? '';
   
-  const typeString = (types.length === 1) ? `Type: ${types[0]}` : `Types: ${types[0]}, ${types[1]}`;
+  const typeString = Array.isArray(types) ? ((types.length === 1) ? `Type: ${types[0]}` : `Types: ${types[0]}, ${types[1]}`) : '';
   const displayType = reveal ? 'inline' : 'none';
   
   return (
