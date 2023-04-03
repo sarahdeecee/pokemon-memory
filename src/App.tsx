@@ -17,6 +17,7 @@ import ButtonMain from './components/ButtonMain';
 import Header from './components/Header';
 import Actions from './components/Actions';
 import DialogOptions from './components/DialogOptions';
+import SearchBar from './components/SearchBar';
 
 const capitalize = (string: string): string => {
   return string[0].toUpperCase() + string.slice(1,string.length);
@@ -83,7 +84,8 @@ function App() {
   const selectedGenerations: number[] = Object.keys(Object.fromEntries(Object.entries(generations).filter(([generation, value]) => value === true))).map(genAsStr => Number.parseInt(genAsStr));
 
   // Select samples from generations
-  const poolFromGenerations = pokemonFullList.filter(pokemon => selectedGenerations.includes(pokemon.generation));
+  const poolFromGenerations = pokemonFullList.filter(pokemon => selectedGenerations.includes(pokemon.generation))
+  const camelCasePool = poolFromGenerations.forEach(pokemon => pokemon.name = camelCase(pokemon.name));
 
   useEffect(() => {
     let randomNumber = Math.ceil(Math.random() * poolFromGenerations.length) - 1;
@@ -168,6 +170,7 @@ function App() {
           {pokemonResults}
         </Grid>
         <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleDialog} />
+        <SearchBar pool={poolFromGenerations} />
         <Grid item xs={12} sx={{mt: '2vh', mb: '5vh'}}>
           {pokemon.length > 0 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
           {pokemonList}
