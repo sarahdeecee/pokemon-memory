@@ -41,6 +41,7 @@ type Pokemon = {
   generation: number,
   types?: string[],
   imgSrc?: string,
+  veto?: boolean
 };
 
 type GenSelect = {
@@ -79,21 +80,46 @@ function App() {
     open: false
   });
   const [revealImg, setRevealImg] = useState<boolean>(false);
+  const [vetoPokemon, setVetoPokemon] = useState<Pokemon[]>([]);
 
   // create pool from selected generations
   const selectedGenerations: number[] = Object.keys(Object.fromEntries(Object.entries(generations).filter(([generation, value]) => value === true))).map(genAsStr => Number.parseInt(genAsStr));
 
   // Select samples from generations
   const poolFromGenerations = pokemonFullList.filter(pokemon => selectedGenerations.includes(pokemon.generation))
+  // Add camel case to pokemon names in pool
   const camelCasePool = poolFromGenerations.forEach(pokemon => pokemon.name = camelCase(pokemon.name));
 
   useEffect(() => {
     let randomNumber = Math.ceil(Math.random() * poolFromGenerations.length) - 1;
     
-    if (add && pokemon.length < poolFromGenerations.length) {
+    // check if veto is already pulled
+    const countDuplicates = (array1: any[], array2: any[]) => array1.filter(elem => array2.includes(elem)).length;
+    const vetoedAndPulledCount = countDuplicates(vetoPokemon, pokemon);
+
+    console.log('duplicates ',vetoedAndPulledCount);
+
+    /*
+      const findPercentage = (first, second) => {
+        const count = first.reduce((acc, val) => {
+            if(second.includes(val)){
+              return ++acc;
+            };
+            return acc;
+        }, 0);
+        return (count / first.length) * 100;
+      };
+    */
+
+    if (add && poolFromGenerations.length > (pokemon.length + vetoPokemon.length - countDuplicates(vetoPokemon, pokemon))) {
+      // need to factor in pulled pokemon
+      // pool - pokemon - veto + duplicates
+      // pokemon = pool - veto + duplicates
+      // pool = pokemon + veto - duplicates
+
       let randomPokemon = poolFromGenerations[randomNumber];
       // if list already has ID number, get a new random number
-      while (hasDuplicate(pokemon, randomPokemon.id)) {
+      while (hasDuplicate(pokemon, randomPokemon.id) || hasDuplicate(vetoPokemon, randomPokemon.id)) {
         randomNumber = Math.ceil(Math.random() * poolFromGenerations.length);
         randomPokemon = poolFromGenerations[randomNumber];
       }
@@ -170,7 +196,7 @@ function App() {
           {pokemonResults}
         </Grid>
         <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleDialog} />
-        <SearchBar pool={poolFromGenerations} />
+        <SearchBar pool={poolFromGenerations} veto={vetoPokemon} setVeto={setVetoPokemon} />
         <Grid item xs={12} sx={{mt: '2vh', mb: '5vh'}}>
           {pokemon.length > 0 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
           {pokemonList}

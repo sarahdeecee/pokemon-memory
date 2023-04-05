@@ -9,9 +9,14 @@ type Pokemon = {
   imgSrc?: string,
 };
 
-function SearchBar(props: {pool: Pokemon[]}) {
-  const {pool} = props ?? []; 
+function SearchBar(props: {pool: Pokemon[], veto: Pokemon[], setVeto: React.Dispatch<React.SetStateAction<Pokemon[]>>}) {
+  const {pool, veto} = props ?? []; 
+  const {setVeto} = props;
   
+  const handleSearchChange = (e: React.SyntheticEvent, selected: Pokemon[]): void => {
+    setVeto(selected);
+  }
+  // console.log(veto);
   return (
     <Autocomplete
       multiple
@@ -20,26 +25,27 @@ function SearchBar(props: {pool: Pokemon[]}) {
       disableCloseOnSelect
       options={pool}
       getOptionLabel={pokemon => pokemon.name}
-      renderOption={(props, option, { selected }) => (
+      renderOption={(props, pokemon, { selected }) => (
         <li {...props}>
           <Checkbox
             icon={<CheckBoxOutlineBlank fontSize="small" />}
             checkedIcon={<CheckBox fontSize="small" />}
             checked={selected}
           />
-          {option.name}
+          {pokemon.name}
         </li>
       )}
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Search input"
+          label="Search pokemon to remove from pool"
           InputProps={{
             ...params.InputProps,
             type: 'search',
           }}
           />
         )}
+      onChange={handleSearchChange}
       sx={{ width: 500 }}
     />
   );
