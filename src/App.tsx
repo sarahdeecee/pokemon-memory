@@ -66,14 +66,14 @@ function App() {
   const [add, setAdd] = useState<boolean>(false);
   const [generations, setGenerations] = useState<GenSelect>({
     1: true,
-    2: true,
-    3: true,
-    4: true,
-    5: true,
-    6: true,
-    7: true,
-    8: true,
-    9: true,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+    6: false,
+    7: false,
+    8: false,
+    9: false,
   });
   const [dialog, setDialog] = useState<DialogSet>({
     content: '',
@@ -89,15 +89,16 @@ function App() {
   const poolFromGenerations = pokemonFullList.filter(pokemon => selectedGenerations.includes(pokemon.generation))
   // Add camel case to pokemon names in pool
   const camelCasePool = poolFromGenerations.forEach(pokemon => pokemon.name = camelCase(pokemon.name));
+  const countDuplicates = (array1: any[], array2: any[]) => array1.filter(elem => array2.includes(elem)).length;
+  const allPoolPulled: boolean = !(poolFromGenerations.length > (pokemon.length + vetoPokemon.length - countDuplicates(pokemon, vetoPokemon))) ? true : false;
 
   useEffect(() => {
     let randomNumber = Math.ceil(Math.random() * poolFromGenerations.length) - 1;
     
     // check if veto is already pulled
-    const countDuplicates = (array1: any[], array2: any[]) => array1.filter(elem => array2.includes(elem)).length;
     const vetoedAndPulledCount = countDuplicates(vetoPokemon, pokemon);
 
-    console.log('duplicates ',vetoedAndPulledCount);
+    console.log('pool: ',poolFromGenerations.length,' pokemon: ',pokemon.length, ' veto: ',vetoPokemon.length);
 
     /*
       const findPercentage = (first, second) => {
@@ -111,16 +112,17 @@ function App() {
       };
     */
 
-    if (add && poolFromGenerations.length > (pokemon.length + vetoPokemon.length - countDuplicates(vetoPokemon, pokemon))) {
+    if (add && !allPoolPulled) {
       // need to factor in pulled pokemon
       // pool - pokemon - veto + duplicates
       // pokemon = pool - veto + duplicates
       // pool = pokemon + veto - duplicates
-
+      
       let randomPokemon = poolFromGenerations[randomNumber];
-      // if list already has ID number, get a new random number
-      while (hasDuplicate(pokemon, randomPokemon.id) || hasDuplicate(vetoPokemon, randomPokemon.id)) {
-        randomNumber = Math.ceil(Math.random() * poolFromGenerations.length);
+
+      // if list already has ID number, get a new random numberw
+      while (hasDuplicate([...pokemon, ...vetoPokemon], randomPokemon.id)) {
+        randomNumber = Math.ceil(Math.random() * poolFromGenerations.length) - 1;
         randomPokemon = poolFromGenerations[randomNumber];
       }
 
@@ -195,7 +197,7 @@ function App() {
           {pokemon.length === 0 && <Typography variant='h5'>Click 'Generate' to generate a Pokemon.</Typography>}
           {pokemonResults}
         </Grid>
-        <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleDialog} />
+        <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleDialog} allPoolPulled={allPoolPulled} />
         <SearchBar pool={poolFromGenerations} veto={vetoPokemon} setVeto={setVetoPokemon} />
         <Grid item xs={12} sx={{mt: '2vh', mb: '5vh'}}>
           {pokemon.length > 0 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
