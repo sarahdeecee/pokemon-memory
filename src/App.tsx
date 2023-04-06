@@ -88,7 +88,8 @@ function App() {
   // Select samples from generations
   const poolFromGenerations = pokemonFullList.filter(pokemon => selectedGenerations.includes(pokemon.generation))
   // Add camel case to pokemon names in pool
-  const camelCasePool = poolFromGenerations.forEach(pokemon => pokemon.name = camelCase(pokemon.name));
+  poolFromGenerations.forEach(pokemon => pokemon.name = camelCase(pokemon.name));
+  
   const countDuplicates = (array1: any[], array2: any[]) => array1.filter(elem => array2.includes(elem)).length;
   const allPoolPulled: boolean = !(poolFromGenerations.length > (pokemon.length + vetoPokemon.length - countDuplicates(pokemon, vetoPokemon))) ? true : false;
 
@@ -98,26 +99,7 @@ function App() {
     // check if veto is already pulled
     const vetoedAndPulledCount = countDuplicates(vetoPokemon, pokemon);
 
-    console.log('pool: ',poolFromGenerations.length,' pokemon: ',pokemon.length, ' veto: ',vetoPokemon.length);
-
-    /*
-      const findPercentage = (first, second) => {
-        const count = first.reduce((acc, val) => {
-            if(second.includes(val)){
-              return ++acc;
-            };
-            return acc;
-        }, 0);
-        return (count / first.length) * 100;
-      };
-    */
-
     if (add && !allPoolPulled) {
-      // need to factor in pulled pokemon
-      // pool - pokemon - veto + duplicates
-      // pokemon = pool - veto + duplicates
-      // pool = pokemon + veto - duplicates
-      
       let randomPokemon = poolFromGenerations[randomNumber];
 
       // if list already has ID number, get a new random numberw
