@@ -102,7 +102,7 @@ function App() {
     if (add && !allPoolPulled) {
       let randomPokemon = poolFromGenerations[randomNumber];
 
-      // if list already has ID number, get a new random numberw
+      // if list already has ID number, get a new random number
       while (hasDuplicate([...pokemon, ...vetoPokemon], randomPokemon.id)) {
         randomNumber = Math.ceil(Math.random() * poolFromGenerations.length) - 1;
         randomPokemon = poolFromGenerations[randomNumber];
@@ -127,7 +127,7 @@ function App() {
             }
         );
     }
-  }, [add]);
+  }, [add, vetoPokemon]);
 
   const handleAddPokemon = () => {
     if (Object.values(generations).includes(true)) {
