@@ -173,9 +173,9 @@ function App() {
   const pokemonResults = <Results empty={pokemon.length === 0} currentPokemon={currentPokemon} reveal={revealImg} button={revealOrHideButton()} />
 
   return (
-    <Stack className="App" useFlexGap spacing={{ xs: 2, sm: 3 }}>
+    <Stack className="App" useFlexGap >
       <Header />
-      <Box className="Main">
+      <Box className="Main" sx={{padding: 3}}>
         
           {pokemon.length === 0 && <Typography variant='h5'>Click 'Generate' to generate a Pokemon.</Typography>}
           {pokemonResults}
