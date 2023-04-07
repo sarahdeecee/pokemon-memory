@@ -2,7 +2,7 @@ import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import { Menu, Settings } from '@mui/icons-material';
 function Header(props: any) {
   return (
-    <Box sx={{ flexGrow: 1}} className="header">
+    <Box className="header">
       <AppBar position="static">
         <Toolbar>
           <IconButton

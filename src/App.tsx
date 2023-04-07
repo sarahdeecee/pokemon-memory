@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import './App.scss';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Typography } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Stack, Typography } from '@mui/material';
 import { pokemonGen1 } from './data/PokemonGen1';
 import { pokemonListGen2 } from './data/PokemonGen2';
 import { pokemonListGen3 } from './data/PokemonGen3';
@@ -139,6 +139,7 @@ function App() {
   const handleReset = () => {
     handleDialogClose();
     setPokemon([]);
+    setVetoPokemon([]);
     setCurrentPokemon(null);
     setAdd(false);
   }
@@ -172,22 +173,26 @@ function App() {
   const pokemonResults = <Results empty={pokemon.length === 0} currentPokemon={currentPokemon} reveal={revealImg} button={revealOrHideButton()} />
 
   return (
-    <div className="App">
+    <Stack className="App" useFlexGap spacing={{ xs: 2, sm: 3 }}>
       <Header />
-      <Grid container className="Main" sx={{height: '100%', my: '5vh', justifyContent: 'space-between'}}>
-        <Grid item xs={12}>
+      <Box className="Main">
+        
           {pokemon.length === 0 && <Typography variant='h5'>Click 'Generate' to generate a Pokemon.</Typography>}
           {pokemonResults}
-        </Grid>
-        <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleDialog} allPoolPulled={allPoolPulled} />
-        <SearchBar pool={poolFromGenerations} veto={vetoPokemon} setVeto={setVetoPokemon} />
-        <Grid item xs={12} sx={{mt: '2vh', mb: '5vh'}}>
+        
+        
+          <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleDialog} allPoolPulled={allPoolPulled} />
+        
+        {/* <Item sx={{maxWidth: '95vw'}}> */}
+          <SearchBar pool={poolFromGenerations} veto={vetoPokemon} setVeto={setVetoPokemon} />
+        
+        {/* <Item sx={{mt: '2vh', mb: '5vh'}}> */}
           {pokemon.length > 0 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
           {pokemonList}
-        </Grid>
-      </Grid>
+        
       <DialogOptions handleDialogClose={handleDialogClose} dialog={dialog} handleReset={handleReset} generations={generations} setGenerations={setGenerations} />
-    </div>
+      </Box>
+    </Stack>
   );
 }
 

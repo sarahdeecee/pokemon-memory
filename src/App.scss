@@ -4,6 +4,8 @@ $ivory: #F2F1E8;
 $dark-blue: #050533;
 $cinnabar: #E34234;
 
+
+
 html {
   scroll-behavior: smooth;
   height: 100vh;
@@ -16,6 +18,13 @@ body {
 
 body, #root, .App {
   min-height: 100vh;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-evenly;
 }
 
 h1 {
@@ -32,12 +41,15 @@ button.MuiButton-root {
 }
 header {
   background-color: $blue !important;
+  height: 7vh;
 }
 
 div.Main {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   text-align: center;
+  min-height: 93vh;
 }
 
 .Results {

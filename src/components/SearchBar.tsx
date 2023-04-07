@@ -16,7 +16,7 @@ function SearchBar(props: {pool: Pokemon[], veto: Pokemon[], setVeto: React.Disp
   const handleSearchChange = (e: React.SyntheticEvent, selected: Pokemon[]): void => {
     setVeto(selected);
   }
-  // console.log(veto);
+  
   return (
     <Autocomplete
       multiple
@@ -46,8 +46,8 @@ function SearchBar(props: {pool: Pokemon[], veto: Pokemon[], setVeto: React.Disp
           />
         )}
       onChange={handleSearchChange}
-      sx={{ width: 500 }}
-    />
+      sx={{  display: 'flex', justifyContent: 'center' }}
+      />
   );
 }
 
