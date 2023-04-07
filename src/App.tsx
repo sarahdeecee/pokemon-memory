@@ -66,14 +66,14 @@ function App() {
   const [add, setAdd] = useState<boolean>(false);
   const [generations, setGenerations] = useState<GenSelect>({
     1: true,
-    2: false,
-    3: false,
-    4: false,
-    5: false,
-    6: false,
-    7: false,
-    8: false,
-    9: false,
+    2: true,
+    3: true,
+    4: true,
+    5: true,
+    6: true,
+    7: true,
+    8: true,
+    9: true,
   });
   const [dialog, setDialog] = useState<DialogSet>({
     content: '',
@@ -174,21 +174,19 @@ function App() {
   const pokemonResults = <Results empty={pokemon.length === 0} currentPokemon={currentPokemon} reveal={revealImg} button={revealOrHideButton()} />
 
   return (
-    <Stack className="App" useFlexGap >
+    <Stack className="App" useFlexGap>
       <Header />
       <Box className="Main" sx={{padding: 3}}>
         
-          {pokemon.length === 0 && <Typography variant='h5'>Click 'Generate' to generate a Pokemon.</Typography>}
-          {pokemonResults}
+        {pokemon.length === 0 && <Typography variant='h5'>Click 'Generate' to generate a Pokemon.</Typography>}
+        {pokemonResults}
+      
+        <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleDialog} allPoolPulled={allPoolPulled} />
         
-          <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleDialog} allPoolPulled={allPoolPulled} />
+        {pokemon.length > 0 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
+        {pokemonList}
         
-          <SearchBar pool={poolFromGenerations} veto={vetoPokemon} setVeto={setVetoPokemon} />
-        
-          {pokemon.length > 0 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
-          {pokemonList}
-        
-      <DialogOptions handleDialogClose={handleDialogClose} dialog={dialog} handleReset={handleReset} generations={generations} setGenerations={setGenerations} />
+      <DialogOptions handleDialogClose={handleDialogClose} dialog={dialog} handleReset={handleReset} generations={generations} setGenerations={setGenerations} pool={poolFromGenerations} veto={vetoPokemon} setVeto={setVetoPokemon} />
       </Box>
     </Stack>
   );

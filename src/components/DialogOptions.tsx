@@ -1,8 +1,11 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import Options from "./Options";
+import SearchBar from "./SearchBar";
 
 function DialogOptions(props: any) {
   const {handleDialogClose, dialog, handleReset, generations, setGenerations} = props;
+  const {pool, veto, setVeto} = props;
+  
   const resetConfirm = <>
     <DialogTitle id="alert-dialog-title">
       {"Are you sure you want to reset?"}
@@ -21,9 +24,13 @@ function DialogOptions(props: any) {
   </>
 
   const selectGenerations = <>
-    <DialogTitle>Select Generations</DialogTitle>
+    <DialogTitle>Select Options</DialogTitle>
     <DialogContent>
       <Options generations={generations} setGenerations={setGenerations} />
+    </DialogContent>
+    <DialogTitle>Remove Pokemon from Pool</DialogTitle>
+    <DialogContent>
+      <SearchBar pool={pool} veto={veto} setVeto={setVeto} />
     </DialogContent>
     <DialogActions>
       <Button onClick={handleDialogClose}>Close</Button>

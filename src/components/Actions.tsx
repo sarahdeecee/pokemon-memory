@@ -1,8 +1,9 @@
 import { Box, Toolbar, Typography } from "@mui/material";
 import ButtonMain from "./ButtonMain";
+import SearchBar from "./SearchBar";
 
 function Actions(props: any) {
-  const {generations, pokemon, add, reset, options, allPoolPulled} = props;
+  const {generations, pokemon, add, reset, options, allPoolPulled, pool, veto, setVeto} = props;
   const empty = pokemon.length === 0 ? true : false;
 
   const noGenSelected = !Object.values(generations).includes(true);

@@ -38,7 +38,7 @@ function SearchBar(props: {pool: Pokemon[], veto: Pokemon[], setVeto: React.Disp
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Search pokemon to remove from pool"
+          label="Search Pokemon"
           InputProps={{
             ...params.InputProps,
             type: 'search',
