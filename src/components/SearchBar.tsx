@@ -46,7 +46,7 @@ function SearchBar(props: {pool: Pokemon[], veto: Pokemon[], setVeto: React.Disp
           />
         )}
       onChange={handleSearchChange}
-      sx={{  display: 'flex', justifyContent: 'center' }}
+      sx={{ maxWidth: '800px', width: '100%' }}
       />
   );
 }
