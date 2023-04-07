@@ -113,6 +113,7 @@ function App() {
         .then(res => res.json())
         .then(
           (result) => {
+            // get relevant info from API
             const newPokemonImg: string = result.sprites.other["official-artwork"]["front_default"];
             const newPokemonTypesArr: {slot: number, type: {name: string, url: string}}[] = result.types;
             const newPokemonTypes: string[] = newPokemonTypesArr.map(typeObj => camelCase(typeObj.type.name));
@@ -180,13 +181,10 @@ function App() {
           {pokemon.length === 0 && <Typography variant='h5'>Click 'Generate' to generate a Pokemon.</Typography>}
           {pokemonResults}
         
-        
           <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleDialog} allPoolPulled={allPoolPulled} />
         
-        {/* <Item sx={{maxWidth: '95vw'}}> */}
           <SearchBar pool={poolFromGenerations} veto={vetoPokemon} setVeto={setVetoPokemon} />
         
-        {/* <Item sx={{mt: '2vh', mb: '5vh'}}> */}
           {pokemon.length > 0 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
           {pokemonList}
         
