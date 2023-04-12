@@ -1,8 +1,4 @@
-type Pokemon = {
-  name: string,
-  id: number,
-  generation: number
-}
+import { Pokemon } from "../types/Types";
 
 export const pokemonListGen5: Pokemon[] = [
   {
