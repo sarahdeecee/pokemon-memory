@@ -1,5 +1,5 @@
 import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
-import { Menu, Settings } from '@mui/icons-material';
+import { Menu } from '@mui/icons-material';
 function Header(props: any) {
   return (
     <Box className="header">

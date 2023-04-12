@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import './App.scss';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { pokemonGen1 } from './data/PokemonGen1';
 import { pokemonListGen2 } from './data/PokemonGen2';
 import { pokemonListGen3 } from './data/PokemonGen3';
@@ -11,13 +11,11 @@ import { pokemonListGen6 } from './data/PokemonGen6';
 import { pokemonListGen7 } from './data/PokemonGen7';
 import { pokemonListGen8 } from './data/PokemonGen8';
 import { pokemonListGen9 } from './data/PokemonGen9';
-import Options from './components/Options';
 import Results from './components/Results';
 import ButtonMain from './components/ButtonMain';
 import Header from './components/Header';
 import Actions from './components/Actions';
 import DialogOptions from './components/DialogOptions';
-import SearchBar from './components/SearchBar';
 
 const capitalize = (string: string): string => {
   return string[0].toUpperCase() + string.slice(1,string.length);
@@ -58,7 +56,7 @@ const hasDuplicate = (pokemonList: Pokemon[], pokemonId: number): boolean => {
 }
 
 const pokemonFullList = [...pokemonGen1, ...pokemonListGen2, ...pokemonListGen3, ...pokemonListGen4, ...pokemonListGen5, ...pokemonListGen6, ...pokemonListGen7, ...pokemonListGen8, ...pokemonListGen9];
-const totalPokemonCount = pokemonFullList.length;
+// const totalPokemonCount = pokemonFullList.length;
 
 function App() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
@@ -96,13 +94,10 @@ function App() {
   useEffect(() => {
     let randomNumber = Math.ceil(Math.random() * poolFromGenerations.length) - 1;
     
-    // check if veto is already pulled
-    const vetoedAndPulledCount = countDuplicates(vetoPokemon, pokemon);
-
     if (add && !allPoolPulled) {
       let randomPokemon = poolFromGenerations[randomNumber];
 
-      // if list already has ID number, get a new random number
+      // if ID number was pulled or vetoed, get a new random number
       while (hasDuplicate([...pokemon, ...vetoPokemon], randomPokemon.id)) {
         randomNumber = Math.ceil(Math.random() * poolFromGenerations.length) - 1;
         randomPokemon = poolFromGenerations[randomNumber];
@@ -172,7 +167,7 @@ function App() {
     return <ButtonMain func={handleRevealImg} label={revealImg ? "Hide" : "Reveal"} />;
   }
   const pokemonResults = <Results empty={pokemon.length === 0} currentPokemon={currentPokemon} reveal={revealImg} button={revealOrHideButton()} />
-
+  console.log('veto: ',vetoPokemon);
   return (
     <Stack className="App" useFlexGap>
       <Header />
@@ -182,7 +177,7 @@ function App() {
         {pokemonResults}
       
         <Actions generations={generations} pokemon={pokemon} add={handleAddPokemon} reset={handleReset} options={handleDialog} allPoolPulled={allPoolPulled} />
-        
+
         {pokemon.length > 0 ? <Typography variant='h4'>Generated Pokemon:</Typography> : ''}
         {pokemonList}
         

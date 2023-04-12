@@ -9,8 +9,8 @@ type Pokemon = {
   imgSrc?: string,
 };
 
-function SearchBar(props: {pool: Pokemon[], veto: Pokemon[], setVeto: React.Dispatch<React.SetStateAction<Pokemon[]>>}) {
-  const {pool, veto} = props ?? []; 
+function SearchBar(props: {pool: Pokemon[], setVeto: React.Dispatch<React.SetStateAction<Pokemon[]>>}) {
+  const {pool} = props ?? []; 
   const {setVeto} = props;
   
   const handleSearchChange = (e: React.SyntheticEvent, selected: Pokemon[]): void => {

@@ -4,8 +4,8 @@ import SearchBar from "./SearchBar";
 
 function DialogOptions(props: any) {
   const {handleDialogClose, dialog, handleReset, generations, setGenerations} = props;
-  const {pool, veto, setVeto} = props;
-  
+  const {pool, setVeto} = props;
+
   const resetConfirm = <>
     <DialogTitle id="alert-dialog-title">
       {"Are you sure you want to reset?"}
@@ -30,7 +30,7 @@ function DialogOptions(props: any) {
     </DialogContent>
     <DialogTitle>Remove Pokemon from Pool</DialogTitle>
     <DialogContent>
-      <SearchBar pool={pool} veto={veto} setVeto={setVeto} />
+      <SearchBar pool={pool} setVeto={setVeto} />
     </DialogContent>
     <DialogActions>
       <Button onClick={handleDialogClose}>Close</Button>
@@ -38,7 +38,7 @@ function DialogOptions(props: any) {
   </>
 
   return (
-    <Dialog onClose={handleDialogClose} open={dialog.open}>
+    <Dialog onClose={handleDialogClose} open={dialog.open} disableEnforceFocus>
       {(dialog.content === 'select') ? selectGenerations : resetConfirm}
     </Dialog>
   );
