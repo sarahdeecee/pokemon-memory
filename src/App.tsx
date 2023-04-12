@@ -16,6 +16,7 @@ import ButtonMain from './components/ButtonMain';
 import Header from './components/Header';
 import Actions from './components/Actions';
 import DialogOptions from './components/DialogOptions';
+import { Pokemon, GenSelect, DialogSet } from './types/Types';
 
 const capitalize = (string: string): string => {
   return string[0].toUpperCase() + string.slice(1,string.length);
@@ -31,24 +32,6 @@ const camelCase = (string: string): string => {
     }
   }
   return camelStrArr.join('');
-}
-
-type Pokemon = {
-  name: string,
-  id: number,
-  generation: number,
-  types?: string[],
-  imgSrc?: string,
-  veto?: boolean
-};
-
-type GenSelect = {
-  [key: string]: boolean
-}
-
-type DialogSet = {
-  content: string,
-  open: boolean
 }
 
 const hasDuplicate = (pokemonList: Pokemon[], pokemonId: number): boolean => {
