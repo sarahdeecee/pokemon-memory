@@ -1,13 +1,6 @@
 import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
 import { Autocomplete, Checkbox, TextField } from "@mui/material";
-
-type Pokemon = {
-  name: string,
-  id: number,
-  generation: number,
-  types?: string[],
-  imgSrc?: string,
-};
+import { Pokemon } from "../types/Types";
 
 function SearchBar(props: {pool: Pokemon[], setVeto: React.Dispatch<React.SetStateAction<Pokemon[]>>}) {
   const {pool} = props ?? []; 
