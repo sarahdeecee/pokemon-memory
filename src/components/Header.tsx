@@ -1,5 +1,5 @@
 import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
-import { Menu } from '@mui/icons-material';
+import { Menu, Settings } from '@mui/icons-material';
 function Header(props: any) {
   return (
     <Box className="header">
@@ -14,18 +14,18 @@ function Header(props: any) {
             >
             <Menu />
           </IconButton>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }} align="center">
             Pokemon Generator
           </Typography>
-          {/* <IconButton
+          <IconButton
             size="large"
-            edge="start"
+            edge="end"
             color="inherit"
             aria-label="menu"
             sx={{ ml: 2 }}
           >
             <Settings />
-          </IconButton> */}
+          </IconButton>
         </Toolbar>
       </AppBar>
     </Box>
